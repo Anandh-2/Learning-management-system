@@ -1,0 +1,10 @@
+.course-page #course-area{
+    display: flex;
+}
+
+.course-page #content-area{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+}

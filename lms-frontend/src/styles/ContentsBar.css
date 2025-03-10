@@ -1,0 +1,16 @@
+.content-bar{
+    min-height: 100vh;
+    flex: 0.2;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: white;
+    /*box-shadow: 5px 0 5px 0px #CFFFDC;*/
+    border-right: 5px solid #CFFFDC;
+}
+
+.content-bar .module{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid #CFFFDC;
+    font-size: larger;
+}

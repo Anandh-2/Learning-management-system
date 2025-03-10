@@ -1,0 +1,33 @@
+footer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: #CFFFDC;
+}
+
+footer img{
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+footer ul{
+    list-style: none;
+    padding: 0;
+}
+
+footer #contact li{
+    line-height: 30px;
+}
+
+footer #quick-links li{
+    line-height: 30px;
+}
+
+footer #contact li span{
+    font-weight: bold;
+}

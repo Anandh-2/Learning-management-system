@@ -1,0 +1,12 @@
+.course-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.course-list #courses{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 50px;
+}

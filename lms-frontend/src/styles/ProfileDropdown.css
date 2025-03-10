@@ -1,0 +1,21 @@
+.profile-dropdown{
+    position: absolute;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    right: 0;
+    top: calc(100% + 10px);
+    border-radius: 10px;
+}
+
+.profile-dropdown ul{
+    list-style: none;
+    font-size: large;
+    padding: 0;
+    margin: 0px 10px;
+}
+
+.profile-dropdown li{
+    border-bottom: 1px solid #CFFFDC;
+    padding: 5px 20px;
+}

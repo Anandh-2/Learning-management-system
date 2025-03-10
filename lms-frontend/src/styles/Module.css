@@ -1,0 +1,15 @@
+.module{
+    cursor: pointer;
+}
+
+.module ul{
+    margin: 0;
+    list-style: none;
+    padding-left: 20px;
+}
+
+.module li{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    opacity: calc(0.8);
+}

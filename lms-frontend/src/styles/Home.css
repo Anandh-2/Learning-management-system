@@ -1,0 +1,24 @@
+.home{
+    height: 100vh;
+}
+
+.home nav{
+    display: flex;
+    background-color: black;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+.home h1{
+    color: white;
+}
+
+.home nav p{
+    display: flex;
+    gap: 20px;
+}
+
+.home nav a{
+    color: white;
+    text-decoration: none;
+}
