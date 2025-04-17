@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "../styles/Login.css";
 import { Link, useNavigate } from "react-router-dom";
-import {loginUser} from "../api/Auth";
+import {loginUser} from "../api/Api";
+import { useAuth } from "../context/AuthContext";
 
 const defaultData = {
   email: "",
@@ -11,6 +12,7 @@ const defaultData = {
 function Login() {
   const [userData, setUserData] = useState(defaultData);
   const navigate = useNavigate();
+  const {user, login, logout} = useAuth();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData({
@@ -29,6 +31,7 @@ function Login() {
       const response = await loginUser(userData);
       if(response?.data.token){
         localStorage.setItem("usertoken",response.data.token);
+        login(response.data.role);
         navigate("/dashboard");
       }
       else{

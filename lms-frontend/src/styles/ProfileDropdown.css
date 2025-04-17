@@ -19,3 +19,7 @@
     border-bottom: 1px solid #CFFFDC;
     padding: 5px 20px;
 }
+
+.profile-dropdown li:hover{
+    cursor: pointer;
+}

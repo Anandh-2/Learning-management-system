@@ -4,6 +4,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/authRoutes');
 const ytRoutes = require('./routes/ytRoutes');
+const courseRoutes = require('./routes/courseRoutes')
 const {auth} = require('./middlewares/Auth')
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use('/',authRoutes);
 app.use('/',ytRoutes);
+app.use('/',courseRoutes);
 
 
 mongoose.connect(process.env.MONGO_URI).then(()=>{

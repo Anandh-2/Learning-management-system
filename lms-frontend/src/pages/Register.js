@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../styles/Register.css";
 import { Link, useNavigate } from "react-router-dom";
-import { registerUser } from "../api/Auth";
+import { registerUser } from "../api/Api";
 
 const defaultData = {
   username: "",
