@@ -41,7 +41,7 @@ exports.register = async (req, res)=>{
         )
         return res.status(201).json({message: 'Registration successful', token});
     } catch(err){
-        return res.status(500).json({message: 'Server error'});
+        return res.status(500).json({message: 'Server error',err});
     }
 };
 
@@ -61,7 +61,7 @@ exports.login= async (req, res)=>{
             process.env.JWT_SECRET,
             {expiresIn:'1h'}
         )
-        return res.status(200).json({message: 'Login successful', token});
+        return res.status(200).json({message: 'Login successful', token, role: user.role});
     } catch(err){
         return res.status(500).json({message: 'Server error'});
     }

@@ -26,7 +26,7 @@ function Welcome() {
       <div id="welcome-content">
         <div id="welcome-text">
           <p>
-            Lets <span>change</span>{" "}
+            Let's <span>change</span>{" "}
           </p>
           <p>
             how it's <span>taught</span>
