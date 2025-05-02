@@ -8,7 +8,6 @@ function InstructorDashboard() {
     <div className="dashboard">
       <NavBar/>
       <CourseList title='Your Courses' fetchCourses={getCreatedCourses}/>
-      <Footer/>
     </div>
   )
 }

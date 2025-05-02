@@ -1,13 +1,14 @@
 const mongoose=require('mongoose');
 
 const userSchema=new mongoose.Schema({
-    _id:{type: String, required:true},
     username:{type: String, required:true},
+    userId:{type:String, required:true, unique:true},
     email:{type: String, required: true, unique: true},
     password: {type: String, required: true},
-    role: {type: String, enum: ["student", "instructor", "HOD", "admin"], default: "student"},
-    department: {type:String, enum: ["CSE","IT","ECE","EEE","MECH","NA"],default: "NA"},
-    year: {type:String, enum: ["I","II","III","IV","NA"],default:"NA"},
+    role: {type: String, enum: ["student", "instructor", "hod", "admin"], default: "student"},
+    department: {type:mongoose.Schema.Types.ObjectId, ref:"Department", required:true},
+    batch: {type:mongoose.Schema.Types.ObjectId, ref:"Batch", required:function(){return this.role==="student";}},
+    isVerified: {type:mongoose.Schema.Types.Boolean, default:true}
 },
 {timestamps:true});
 

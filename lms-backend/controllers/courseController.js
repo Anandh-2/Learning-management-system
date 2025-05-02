@@ -6,35 +6,36 @@ const Enrollment = require('../models/Enrollment.js');
 
 exports.createCourse = async(req, res)=>{
     try{
-        const {courseCode, courseName} = req.body;
-        const existingCourse = await Course.findById(courseCode);
-        if(existingCourse){
-            return res.status(409).json({message: 'Course already exists'});
-        }
-        const instructor = await User.findById(req.user.id);
+        const {title,semester}=req.body;
         const newCourse = new Course({
-            _id: courseCode,
-            title: courseName,
-            instructor: instructor.username,
-            department: instructor.department,
-            //semesterId:semesterId
-        });
-        console.log(newCourse);
-        console.log(courseCode);
+            title,
+            instructor:req.user.id,
+            department:req.user.dept,
+            semester
+        })
         await newCourse.save();
-        return res.status(200).json({message: 'Course created successfully'});
+        return res.status(201).json({message:"Course creation successful", course:newCourse});
     }catch (err){
-        console.log(err);
         return res.status(500).json({message:'Server error'});
     }
 };
 
+exports.deleteCourse=async(req,res)=>{
+    try{
+        const courseId = req.params.courseId;
+        await Course.findByIdAndDelete(courseId);
+        return res.status(200).json('Course deleted successfully');
+    }catch(err){
+        return res.status(500).json({message:'Server error'});
+    }
+}
+
 exports.getEnrolledCourses = async(req,res)=>{
     try{
-        const coursesIds = await Enrollment.find({studentId:req.user.id}).populate("");
-        //const courses = await Course.
+        const courses = await Enrollment.find({student:req.user.id}).populate("course");
+        return res.status(200).json({courses});
     }catch(err){
-        
+        return res.status(500).json({message:'Server error'});
     }
 };
 
@@ -48,27 +49,3 @@ exports.getCreatedCourses = async(req,res)=>{
     }
 }
 
-exports.getModules = async(req, res)=>{
-    try{
-        const {courseId} = req.body;
-        const modules = await Module.find({courseId});
-        return res.status(200).json({modules});
-    }catch(err){
-        return res.status(500).json({message:'Server error'});
-    }
-}
-
-exports.createModule = async(req,res)=>{
-    try{
-        const {courseId} = req.body;
-        const newModule = new Module({
-            moduleName:"New Module",
-            courseId:courseId,
-            contents:[]
-        });
-        await newModule.save();
-        return res.status(200).json({message:'Module created successfully'});
-    }catch (err){
-        return res.status(500).json({message:'Server error'});
-    }
-};

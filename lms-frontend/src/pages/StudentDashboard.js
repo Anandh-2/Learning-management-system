@@ -11,7 +11,6 @@ function StudentDashboard() {
     <div className="dashboard">
       <NavBar/>
       <CourseList title='Your Courses' fetchCourses={getEnrolledCourses}/>
-      <Footer/>
     </div>
   );
 }

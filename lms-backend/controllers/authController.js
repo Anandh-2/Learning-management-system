@@ -2,7 +2,6 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcryptjs = require('bcryptjs');
 const User = require('../models/User');
-const PendingUser = require('../models/PendingUser');
 
 const hashPassword = async (password) => {
   try {
@@ -17,7 +16,7 @@ const hashPassword = async (password) => {
 
 exports.register = async (req, res)=>{
     try{
-        const {id,username, email, password, role, department, year}=req.body;
+        const {userId, username, email, password, role, department, batch, isVerified=true}=req.body;
         const existingUser= await User.findOne({
             email: email,
         })
@@ -25,17 +24,18 @@ exports.register = async (req, res)=>{
             return res.status(409).json({message: 'User already exists'});
         }
         const user = new User({
-            _id:id,
+            userId,
             username,
             email,
             password: await hashPassword(password),
             role,
             department,
-            year,
+            batch,
+            isVerified
         })
         await user.save();
         const token = jwt.sign(
-            { id: user.id, role: user.role},
+            { id: user.id, role: user.role, dept: user.department},
             process.env.JWT_SECRET,
             {expiresIn:'0.1h'}            
         )
@@ -68,27 +68,30 @@ exports.login= async (req, res)=>{
 };
 
 
-exports.request=async(req, res)=>{
+exports.request=[
+    async(req, res, next)=>{
+        req.body.isVerified=false;
+        next();
+    },
+    register
+];
+
+
+exports.approve=async(req,res)=>{
     try{
-        const {id,username, email, password, role, department, year}=req.body;
-        const existingUser= await PendingUser.findOne({
-            email: email,
-        })
-        if(existingUser){
-            return res.status(409).json({message: 'Wait for approval'});
-        }
-        const user = new PendingUser({
-            _id:id,
-            username,
-            email,
-            password: await hashPassword(password),
-            role,
-            department,
-            year,
-        })
-        await user.save();
-        return res.status(201).json({message: 'Registration successful'});
-    } catch(err){
+        const userId = req.params.userId;
+        await User.findByIdAndUpdate(userId, {isVerified:true});
+        return res.status(200).json({message:"Approved succesfully"});
+    }catch(err){
+        return res.status(500).json({message: 'Server error'});
+    }
+}
+
+exports.getRequests=async(req,res)=>{
+    try{
+        const requests = await User.find({isVerified:false});
+        return res.status(200).json(requests);
+    }catch(err){
         return res.status(500).json({message: 'Server error'});
     }
 }
