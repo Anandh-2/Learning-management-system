@@ -9,6 +9,7 @@ import CoursePage from './pages/CoursePage';
 import AdminDashboard from './pages/AdminDashboard';
 import { useAuth } from './context/AuthContext';
 import RoleBasedDashboard from './components/RoleBasedDashboard';
+import CourseEditor from './pages/CourseEditor';
 
 function App() {
   const {user} = useAuth();
@@ -28,6 +29,7 @@ function App() {
 
         />
         <Route path="/:course" element={<CoursePage/>}/>
+        <Route path='/:course/edit' element={<CourseEditor/>}/>
       </Routes>
     </div>
   );

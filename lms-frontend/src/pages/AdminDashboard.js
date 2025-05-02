@@ -10,7 +10,6 @@ function AdminDashboard() {
     <CourseList/>
     <CourseList/>
     <CourseList/>
-    <Footer/>
     </div>
   )
 }

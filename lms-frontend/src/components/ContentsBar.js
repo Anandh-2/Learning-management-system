@@ -7,7 +7,6 @@ function ContentsBar({modules}) {
     <div className='content-bar'>
     <div>
     <h2>Contents</h2>
-    <button>+</button>
     </div>
     {modules.length===0 ? <p>No module</p>:modules.map((module)=><Module module={module}/>)}
     </div>

@@ -46,7 +46,6 @@ function CoursePage() {
           
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

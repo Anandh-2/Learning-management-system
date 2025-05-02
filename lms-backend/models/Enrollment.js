@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const enrollmentSchema = new mongoose.Schema({
-    courseId: {type:String, ref: "Course", required: true},
-    studentId: {type: String, ref: "User", required: true},
-    //semesterId: {type:mongoose.Schema.Types.ObjectId, ref:"Semester",required: true},
+    course: {type:mongoose.Schema.Types.ObjectId, ref: "Course", required: true},
+    student: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true},
     progress: {type: Number, default: 0},
+    completedContents:[{type:mongoose.Schema.Types.ObjectId, ref:"Content"}]
 }, {timestamps: true});
 
 module.exports = mongoose.model("Enrollment", enrollmentSchema);
