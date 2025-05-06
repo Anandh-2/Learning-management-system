@@ -1,8 +1,6 @@
 import React, {useState} from "react";
-import Logo from "../images/EaseLearn.png";
-import { FaSearch } from "react-icons/fa";
-import ProfileDropDown from "../components/ProfileDropdown";
-import '../styles/NavBar.css';
+import ProfileDropDown from "./ProfileDropdown";
+import '../styles/Header.css';
 
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,23 +12,16 @@ function NavBar() {
   const closeDropdown = (e) => {
     setIsOpen(false);
   };
+
+  const name="Dashboard"
   
   return (
-    <nav>
-      <div id="navbar-left">
-        <img src={Logo} alt="logo" />
-        <h1>EaseLearn</h1>
-      </div>
-      <div id="navbar-right">
-        <div id="course-search">
-          <input placeholder="Search" />
-          <button>
-            <FaSearch />
-          </button>
-        </div>
+    <header className="header">
+      <h1>{name}</h1>
+      <div id="header-right">
         <div style={{ position: "relative" }}>
           <button
-            id="profile-button"
+            id="profile-btn"
             onClick={toggleDropdown}
             onBlur={closeDropdown}
           >
@@ -39,7 +30,7 @@ function NavBar() {
           {isOpen && <ProfileDropDown />}
         </div>
       </div>
-    </nav>
+    </header>
   );
 }
 

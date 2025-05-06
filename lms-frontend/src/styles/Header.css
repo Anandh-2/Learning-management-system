@@ -1,0 +1,17 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px 10px 20px;
+}
+
+.header #profile-btn{
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    color: white;
+    background-color: #253D2C;
+    border: none;
+    outline: none;
+    font-size: larger;
+}
