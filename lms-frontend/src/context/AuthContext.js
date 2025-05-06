@@ -4,8 +4,18 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
     const [user, setUser] = useState(()=>{
-        const storedUser = localStorage.getItem("userRole");
-        return storedUser?JSON.parse(storedUser):null;
+        const name = localStorage.getItem("userName");
+        const role = localStorage.getItem("userRole");
+
+        /*if(name && role){
+            return {
+                name: JSON.parse(name),
+                role: JSON.parse(role)
+            }
+        }
+        //console.log(user)
+        return null*/
+        return {name:"Anandh", role:"student"}
     });
 
     const login = (userData) => {

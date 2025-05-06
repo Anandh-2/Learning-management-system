@@ -10,24 +10,22 @@ import AdminDashboard from './pages/AdminDashboard';
 import { useAuth } from './context/AuthContext';
 import RoleBasedDashboard from './components/RoleBasedDashboard';
 import CourseEditor from './pages/CourseEditor';
+import Layout from './pages/Layout';
 
 function App() {
   const {user} = useAuth();
   return (
     <div className="App">
       <Routes>
+      {user ?
+        <Route path="/" element={<Layout/>}>
+          <Route index element={<RoleBasedDashboard userRole={user.role}/>}/>
+        </Route>:
         <Route path="/" element={<Welcome/>}/>
+      }
         <Route path="/register" element={<Register/>}/>
         <Route path="/login" element={<Login/>}/>
-        <Route 
-          path="/dashboard" 
-          element={
-            <PrivateRoute>
-            <RoleBasedDashboard userRole={user}/>
-            </PrivateRoute>
-          }
-
-        />
+      
         <Route path="/:course" element={<CoursePage/>}/>
         <Route path='/:course/edit' element={<CourseEditor/>}/>
       </Routes>

@@ -1,12 +1,10 @@
 import React from 'react'
 import ContentsBar from '../components/ContentsBar'
-import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
 
 function CourseEditor() {
   return (
     <div className="course-page">
-    <NavBar/>
       <header>
         <h1>Course Name</h1>
       </header>

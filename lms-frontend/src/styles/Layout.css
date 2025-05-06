@@ -1,0 +1,8 @@
+.layout{
+    height: 100vh;
+    display: flex;
+}
+
+.layout .main-container{
+    flex: 1;
+}

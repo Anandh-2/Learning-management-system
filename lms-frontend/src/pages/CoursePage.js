@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "../components/NavBar";
 import { useParams } from "react-router-dom";
 import Footer from "../components/Footer";
 import ContentsBar from "../components/ContentsBar";
@@ -39,7 +38,6 @@ function CoursePage() {
   ];*/
   return (
     <div className="course-page">
-      <NavBar />
       <div id="course-area">
         <ContentsBar modules={modules}/>
         <div id="content-area">

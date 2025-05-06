@@ -1,12 +1,16 @@
 .App{
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f5f8ff;
+    background-color: white;
     color: #253D2C;
 }
 
 button:hover{
     cursor: pointer;
+}
+
+h1,h2,p{
+    margin: 0;
 }
 
 a{
