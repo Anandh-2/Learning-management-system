@@ -1,0 +1,75 @@
+/* Reset and base */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.video-page {
+  display: flex;
+  height: 100vh;
+  background-color: #f9fafb;
+}
+
+.video-sidebar {
+  width: 300px;
+  background-color: #1f2937;
+  color: white;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #374151;
+  padding-bottom: 10px;
+}
+
+.video-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.video-item {
+  padding: 12px;
+  margin-bottom: 8px;
+  background-color: #374151;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.video-item:hover {
+  background-color: #4b5563;
+}
+
+.video-item.active {
+  background-color: #2563eb;
+  color: white;
+}
+
+.video-content {
+  flex: 1;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-content iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.no-video-selected {
+  color: white;
+  font-size: 24px;
+}

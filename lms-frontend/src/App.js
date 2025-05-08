@@ -11,7 +11,12 @@ import { useAuth } from './context/AuthContext';
 import RoleBasedDashboard from './components/RoleBasedDashboard';
 import CourseEditor from './pages/CourseEditor';
 import Layout from './pages/Layout';
-
+import Departments from './pages/Departments';
+import Videopage from './pages/Videopage';
+import Batch from './pages/Batch';
+import AcademicYear from './pages/AcademicYear';
+import Users from './pages/Users';
+import NewBatchCreation from './pages/NewBatchCreation';
 function App() {
   const {user} = useAuth();
   return (
@@ -20,6 +25,12 @@ function App() {
       {user ?
         <Route path="/" element={<Layout/>}>
           <Route index element={<RoleBasedDashboard userRole={user.role}/>}/>
+          <Route path='departments' element={<Departments/>}/>
+          <Route path='videopage' element={<Videopage/>}/>
+          <Route path='batch' element={<Batch/>}/>
+          <Route path='batch/new' element={<NewBatchCreation/>}/>
+          <Route path='academicYear' element={<AcademicYear/>}/>
+          <Route path='users' element={<Users/>}/>
         </Route>:
         <Route path="/" element={<Welcome/>}/>
       }

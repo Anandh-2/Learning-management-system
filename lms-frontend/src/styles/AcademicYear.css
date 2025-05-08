@@ -1,0 +1,132 @@
+.academic-container {
+    padding: 24px;
+  }
+  
+  .academic-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  
+  .table-wrapper {
+    overflow-x: auto;
+  }
+  
+  .academic-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .academic-table th,
+  .academic-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+  }
+  
+  .academic-table th {
+    background-color: #f3f4f6;
+  }
+  
+  .academic-table tr:hover {
+    background-color: #f9fafb;
+  }
+  
+  .academic-table input {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .end-year-cell {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  
+  .end-year-cell button {
+    padding: 6px 10px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .end-year-cell button:hover {
+    background-color: #1d4ed8;
+  }
+  
+  .disabled-cell {
+    color: #888;
+    text-align: center;
+    font-style: italic;
+  }
+  .previous-batches {
+    margin-bottom: 16px;
+    background-color: #fef3c7;
+    padding: 12px 16px;
+    border-left: 4px solid #f59e0b;
+    border-radius: 6px;
+    font-size: 16px;
+  }
+  .nav-bar {
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .nav-button {
+    padding: 6px 12px;
+    background-color: #f3f4f6;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .nav-button:hover {
+    background-color: #e5e7eb;
+    border-color: #9ca3af;
+  }
+    
+  .nav-bar {
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .nav-button {
+    padding: 6px 12px;
+    background-color: #f3f4f6;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .nav-button:hover {
+    background-color: #e5e7eb;
+    border-color: #9ca3af;
+  }
+  
+  .nav-button.active {
+    background-color: #2563eb;
+    color: white;
+    border-color: #1d4ed8;
+  }
+  
+  .prev-batch-details {
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+  }
+  
