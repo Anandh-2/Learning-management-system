@@ -83,3 +83,31 @@ export const getModules = async(body)=>{
     return [];
   }
 }
+
+export const getDepartments = async()=>{
+  try{
+    const response = await api.get("/departments");
+    return response.data.departments;
+  }catch(err){
+    console.log("Error in department api");
+    return [];
+  }
+}
+
+export const getBatches = async()=>{
+  try{
+    const response = await api.get("/batches");
+    return response.data.batches;
+  }catch(err){
+    console.log("Error in batches api");
+    return [];
+  }
+}
+
+export const createBatch = async(body)=>{
+  try{
+    return await api.post("/batches",body);
+  }catch(err){
+    console.log("Error in batches api");
+  }
+}
