@@ -5,6 +5,8 @@ const dotenv = require('dotenv');
 const authRoutes = require('./routes/authRoutes');
 const ytRoutes = require('./routes/ytRoutes');
 const courseRoutes = require('./routes/courseRoutes')
+const departmentRoutes = require('./routes/departmentRoutes');
+const batchRoutes = require('./routes/batchRoutes');
 const {auth} = require('./middlewares/Auth')
 dotenv.config();
 
@@ -16,7 +18,8 @@ app.use(express.urlencoded({extended: true}));
 app.use('/',authRoutes);
 app.use('/',ytRoutes);
 app.use('/',courseRoutes);
-
+app.use('/',departmentRoutes);
+app.use('/',batchRoutes);
 
 mongoose.connect(process.env.MONGO_URI).then(()=>{
     console.log('MongoDB connected');

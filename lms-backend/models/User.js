@@ -8,7 +8,8 @@ const userSchema=new mongoose.Schema({
     role: {type: String, enum: ["student", "instructor", "hod", "admin"], default: "student"},
     department: {type:mongoose.Schema.Types.ObjectId, ref:"Department", required:true},
     batch: {type:mongoose.Schema.Types.ObjectId, ref:"Batch", required:function(){return this.role==="student";}},
-    isVerified: {type:mongoose.Schema.Types.Boolean, default:true}
+    isVerified: {type:mongoose.Schema.Types.Boolean, default:true},
+    isActive: {type:Boolean, default:true}
 },
 {timestamps:true});
 
