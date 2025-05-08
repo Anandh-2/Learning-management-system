@@ -15,7 +15,7 @@ export const AuthProvider = ({children}) => {
         }
         //console.log(user)
         return null*/
-        return {name:"Anandh", role:"student"}
+        return {name:"Anandh", role:"admin"}
     });
 
     const login = (userData) => {

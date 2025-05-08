@@ -7,6 +7,9 @@ import { FaBookOpen } from "react-icons/fa6";
 import { FaLayerGroup } from "react-icons/fa";
 import { FaGraduationCap } from "react-icons/fa6";
 import { FaCalendar } from "react-icons/fa";
+import { FaUserFriends } from "react-icons/fa";
+import { FaBookReader } from "react-icons/fa";
+
 
 
 
@@ -41,10 +44,12 @@ function Sidebar() {
       )}
       {user.role === "admin" && (
         <ul className="options">
-          <li><span className="opn"><FaHome/>Dashboard</span></li>
-          <li><span className="opn"><FaLayerGroup/>Departments</span></li>
+          <li><span className="opn" onClick={()=>navigate('/')}><FaHome/>Dashboard</span></li>
+          <li><span className="opn" onClick={()=>navigate('/departments')}><FaLayerGroup/>Departments</span></li>
           <li><span className="opn"><FaGraduationCap/>Batches</span></li>
           <li><span className="opn"><FaCalendar/>Academic Years</span></li>
+          <li><span className="opn"><FaUserFriends />Users</span></li>
+          <li><span className="opn"><FaBookReader />Courses</span></li>
         </ul>
       )}
     </div>

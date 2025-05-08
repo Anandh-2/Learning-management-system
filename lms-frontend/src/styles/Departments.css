@@ -1,0 +1,96 @@
+
+  
+  .departments {
+    font-family: Arial, sans-serif;
+    padding: 5rem;
+    color: #2E6F40;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .container {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 900px;
+    width: 100%;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #CFFFDC;
+    padding: 1.5rem;
+    height: 40px;
+    border-left: 6px solid #68BA7F;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .item:hover {
+    background-color: #68BA7F;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .add-card {
+    text-align: center;
+    font-weight: bold;
+    background-color: #e0fbe0;
+    border: 2px dashed #68BA7F;
+  }
+  
+  
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(37, 61, 44, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(10px); 
+  }
+  
+  .modal-content {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .modal-content input {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+  }
+  
+  .modal-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .modal-buttons button {
+    padding: 0.5rem 1rem;
+    background-color: #2E6F40;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
