@@ -94,6 +94,15 @@ export const getDepartments = async()=>{
   }
 }
 
+export const createDept = async(body)=>{
+  try{
+    const response = await api.post("/departments",body);
+    return response.data.department;
+  }catch(err){
+    console.log("Error in department api");
+  }
+}
+
 export const getBatches = async()=>{
   try{
     const response = await api.get("/batches");

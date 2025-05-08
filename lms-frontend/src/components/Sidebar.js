@@ -46,7 +46,7 @@ function Sidebar() {
         <ul className="options">
           <li><span className="opn" onClick={()=>navigate('/')}><FaHome/>Dashboard</span></li>
           <li><span className="opn" onClick={()=>navigate('/departments')}><FaLayerGroup/>Departments</span></li>
-          <li><span className="opn"><FaGraduationCap/>Batches</span></li>
+          <li><span className="opn" onClick={()=>navigate('/batches')}><FaGraduationCap/>Batches</span></li>
           <li><span className="opn"><FaCalendar/>Academic Years</span></li>
           <li><span className="opn"><FaUserFriends />Users</span></li>
           <li><span className="opn"><FaBookReader />Courses</span></li>

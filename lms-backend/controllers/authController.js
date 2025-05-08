@@ -73,7 +73,7 @@ exports.request=[
         req.body.isVerified=false;
         next();
     },
-    register
+    this.register
 ];
 
 

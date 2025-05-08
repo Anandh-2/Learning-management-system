@@ -27,8 +27,8 @@ function App() {
           <Route index element={<RoleBasedDashboard userRole={user.role}/>}/>
           <Route path='departments' element={<Departments/>}/>
           <Route path='videopage' element={<Videopage/>}/>
-          <Route path='batch' element={<Batch/>}/>
-          <Route path='batch/new' element={<NewBatchCreation/>}/>
+          <Route path='batches' element={<Batch/>}/>
+          <Route path='batches/new' element={<NewBatchCreation/>}/>
           <Route path='academicYear' element={<AcademicYear/>}/>
           <Route path='users' element={<Users/>}/>
         </Route>:
@@ -37,8 +37,6 @@ function App() {
         <Route path="/register" element={<Register/>}/>
         <Route path="/login" element={<Login/>}/>
       
-        <Route path="/:course" element={<CoursePage/>}/>
-        <Route path='/:course/edit' element={<CourseEditor/>}/>
       </Routes>
     </div>
   );
