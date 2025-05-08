@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const {auth, isInstructor}=require('../middlewares/Auth');
-const { createCourse, getEnrolledCourses, getCreatedCourses, getModules } = require('../controllers/courseController');
+const { createCourse, getEnrolledCourses, getCreatedCourses } = require('../controllers/courseController');
+const {getModules} = require('../controllers/moduleController')
 
 router.post("/create-course",auth,isInstructor,createCourse);
 //router.post();

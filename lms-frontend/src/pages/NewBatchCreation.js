@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import '../styles/NewBatchCreation.css';
+import { createBatch, createDept, getDepartments } from '../api/Api';
 
 function NewBatchCreation() {
   const [batchName, setBatchName] = useState('');
-  const [departments, setDepartments] = useState([
-    { id: 1, name: "Computer Science" },
-    { id: 2, name: "Electrical" },
-    { id: 3, name: "Mechanical" },
-    { id: 4, name: "Civil" },
-  ]);
+  const [departments, setDepartments] = useState([]);
   const [selectedDepartments, setSelectedDepartments] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [newDeptName, setNewDeptName] = useState('');
+  // const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleDepartmentToggle = (id) => {
@@ -24,33 +20,32 @@ function NewBatchCreation() {
     );
   };
 
-  const handleAddDepartment = () => {
+  const handleAddDepartment = async() => {
     if (!newDeptName.trim()) return;
 
-    const newId = departments.length + 1;
-    const newDept = { id: newId, name: newDeptName };
-
+    const newDept = await createDept({deptName:newDeptName});
+    if(!newDept)return;
     setDepartments(prev => [...prev, newDept]);
-    setSelectedDepartments(prev => [...prev, newId]);
+    setSelectedDepartments(prev => [...prev, newDept._id]);
     setNewDeptName('');
     setShowModal(false);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const newBatch = {
-      name: batchName,
-      departments: departments.filter(dep => selectedDepartments.includes(dep.id)),
-    };
-
-    try {
-      await axios.post('/api/batch', newBatch); // Adjust the URL to your backend
-      navigate('/batch', { state: { newBatch: batchName } });
-    } catch (error) {
-      console.error('Failed to create batch:', error);
-    }
+    await createBatch({name:batchName, departments:selectedDepartments});
+    navigate('/batches');
   };
+
+  useEffect(()=>{
+    const loadDepartments = async()=>{
+      // setIsLoading(true);
+      const depts = await getDepartments();
+      setDepartments(depts);
+      // setIsLoading(false);
+    }
+    loadDepartments();
+  },[]);
 
   return (
     <div className="new-batch-container">
@@ -74,12 +69,12 @@ function NewBatchCreation() {
           </thead>
           <tbody>
             {departments.map(dep => (
-              <tr key={dep.id}>
+              <tr key={dep._id}>
                 <td>
                   <input
                     type="checkbox"
-                    checked={selectedDepartments.includes(dep.id)}
-                    onChange={() => handleDepartmentToggle(dep.id)}
+                    checked={selectedDepartments.includes(dep._id)}
+                    onChange={() => handleDepartmentToggle(dep._id)}
                   />
                 </td>
                 <td>{dep.name}</td>
