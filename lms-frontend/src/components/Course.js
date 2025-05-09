@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import CourseImg from '../images/Course.jpg';
-import '../styles/Course.css';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react'
+import CourseImg from '../images/Course.jpg'
+import '../styles/Course.css'
+import { useNavigate } from 'react-router-dom'
 import { SlOptionsVertical } from "react-icons/sl";
 
 function Course() {
@@ -10,7 +10,7 @@ function Course() {
   const [isOpOpen, setIsOpOpen] = useState(false);
 
   return (
-    <div className='course' onClick={() => navigate(`/${course._id}`)}> {/* Fixed template string */}
+    <div className='course' onClick={() => navigate(`/${course._id}`)}>
       <button className='option-btn' onClick={(e) => { e.stopPropagation(); setIsOpOpen(prev => !prev); }}>
         <SlOptionsVertical />
       </button>

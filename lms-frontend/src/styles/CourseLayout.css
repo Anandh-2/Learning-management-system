@@ -1,0 +1,15 @@
+.course-layout{
+    height: 100vh;
+    display: flex;
+}
+
+.course-layout #logo{
+    width: 50px;
+    border-radius: 10px;
+}
+
+.course-layout .bar-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

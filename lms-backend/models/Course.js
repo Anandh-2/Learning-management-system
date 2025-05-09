@@ -5,6 +5,7 @@ const courseSchema = new mongoose.Schema({
     instructor: {type: mongoose.Schema.Types.ObjectId, ref:"User", required: true},
     department: {type: mongoose.Schema.Types.ObjectId, ref:"Department", required:true},
     semester:{type:mongoose.Schema.Types.ObjectId, ref:"Semester", required:true},
+    modules:[{type:mongoose.Schema.Types.ObjectId, ref:"Module"}],
     isPublished:{type:Boolean, default:false}
 },{timestamps: true});
 

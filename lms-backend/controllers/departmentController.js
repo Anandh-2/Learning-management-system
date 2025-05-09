@@ -1,5 +1,6 @@
 const Department = require("../models/Department");
 const User = require("../models/User");
+const { assignHod } = require("../services/departmentService");
 
 exports.createDept = async (req, res) => {
   try {
@@ -21,7 +22,11 @@ exports.createDept = async (req, res) => {
 
 exports.assignHOD = async (req, res) => {
   try {
-    
+    const {instructorId} = req.body;
+    const departmentId = req.params.departmentId;
+    const batchId = req.params.batchId;
+    await assignHod(instructorId, batchId, departmentId);
+    return res.status(200).json({message:'New HOD assigned'});
   } catch (err) {
     return res.status(500).json({ message: "Server error" });
   }
