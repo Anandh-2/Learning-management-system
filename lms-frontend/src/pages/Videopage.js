@@ -11,7 +11,7 @@ function Videopage() {
   const [selectedVideo, setSelectedVideo] = useState(null);
 
   useEffect(() => {
-    setSelectedVideo(videos[0].url); // auto-select first video
+    setSelectedVideo(videos[0].url); // Auto-select first video
   }, []);
 
   const handleVideoClick = (url) => {
@@ -20,21 +20,6 @@ function Videopage() {
 
   return (
     <div className="video-page">
-      <div className="video-sidebar">
-        <h2 className="sidebar-title">Video Library</h2>
-        <ul className="video-list">
-          {videos.map((video, index) => (
-            <li
-              key={index}
-              className={`video-item ${selectedVideo === video.url ? 'active' : ''}`}
-              onClick={() => handleVideoClick(video.url)}
-            >
-              ▶ {video.title}
-            </li>
-          ))}
-        </ul>
-      </div>
-
       <div className="video-content">
         {selectedVideo ? (
           <iframe

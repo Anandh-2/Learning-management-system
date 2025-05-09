@@ -33,7 +33,7 @@ function App() {
           <Route path='batches' element={<Batch/>}/>
           <Route path='batches/new' element={<NewBatchCreation/>}/>
          <Route path="/academicYear" element={<AcademicYear />} />
-        <Route path="/academicYear/new" element={<AddAcademicYear />} />
+         <Route path="/academicYear/new" element={<AddAcademicYear />} />
           <Route path='/users' element={<Users/>}/>
         </Route>:
         <Route path="/" element={<Welcome/>}/>

@@ -1,28 +1,77 @@
-.add-batch-container {
-  max-width: 800px;
-  margin: 0 auto;
+.add-academic-container {
+  max-width: 900px;
+  margin: 30px auto;
   padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
 }
 
-.year-selection {
+h2 {
+  text-align: center;
   margin-bottom: 20px;
 }
 
-.year-selection select {
-  padding: 8px;
-  font-size: 14px;
-}
-
-.form-row {
+.year-select {
   display: flex;
-  gap: 10px;
   align-items: center;
-  margin-top: 20px;
   margin-bottom: 20px;
 }
 
-.form-row input,
-.form-row button {
+.year-select label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.year-select select {
   padding: 8px;
-  font-size: 14px;
+  font-size: 16px;
+  min-width: 150px;
+}
+
+.input-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  table-layout: fixed;
+}
+
+.input-table th,
+.input-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.input-table th {
+  background-color: #eaeaea;
+}
+
+.input-table input,
+.input-table select {
+  width: 100%;
+  padding: 8px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+button {
+  padding: 10px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #0056b3;
 }
