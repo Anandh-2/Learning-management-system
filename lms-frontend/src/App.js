@@ -15,8 +15,11 @@ import Departments from './pages/Departments';
 import Videopage from './pages/Videopage';
 import Batch from './pages/Batch';
 import AcademicYear from './pages/AcademicYear';
+import AddAcademicYear from './pages/AddAcadamicYear';
 import Users from './pages/Users';
 import NewBatchCreation from './pages/NewBatchCreation';
+
+
 function App() {
   const {user} = useAuth();
   return (
@@ -29,8 +32,9 @@ function App() {
           <Route path='videopage' element={<Videopage/>}/>
           <Route path='batches' element={<Batch/>}/>
           <Route path='batches/new' element={<NewBatchCreation/>}/>
-          <Route path='academicYear' element={<AcademicYear/>}/>
-          <Route path='users' element={<Users/>}/>
+         <Route path="/academicYear" element={<AcademicYear />} />
+        <Route path="/academicYear/new" element={<AddAcademicYear />} />
+          <Route path='/users' element={<Users/>}/>
         </Route>:
         <Route path="/" element={<Welcome/>}/>
       }
