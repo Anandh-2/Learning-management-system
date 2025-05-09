@@ -3,82 +3,104 @@ import { useNavigate } from "react-router-dom";
 import "../styles/AddAcadamicYear.css";
 
 const AddAcademicYear = () => {
-  const [selectedYear, setSelectedYear] = useState("");
-  const [newEntry, setNewEntry] = useState({
-    semester: "",
-    startDate: "",
-    endDate: ""
-  });
+  const [year, setYear] = useState("");
+  const [rows, setRows] = useState([
+    { batch: "", semester: "1", startDate: "", endDate: "" },
+  ]);
 
   const navigate = useNavigate();
-  const availableYears = [2020, 2021, 2022, 2023, 2024, 2025];
 
-  const handleInputChange = (e) => {
-    setNewEntry({
-      ...newEntry,
-      [e.target.name]: e.target.value
-    });
+  const batchOptions = ["2020", "2021", "2022", "2023", "2024", "2025"];
+
+  const handleChange = (index, field, value) => {
+    const updatedRows = [...rows];
+    updatedRows[index][field] = value;
+    setRows(updatedRows);
   };
 
-  const handleAddBatch = () => {
-    const { semester, startDate, endDate } = newEntry;
+  const handleAddRow = () => {
+    setRows([...rows, { batch: "", semester: "1", startDate: "", endDate: "" }]);
+  };
 
-    if (!semester || !startDate || !endDate) {
-      alert("Please fill in all fields.");
-      return;
-    }
-
-    // TODO: Add batch to a global store or backend here
-
-    // Reset form
-    setNewEntry({ semester: "", startDate: "", endDate: "" });
-
-    // Navigate back to academic year list
+  const handleSave = () => {
+    console.log("Saved Data:", { year, rows });
     navigate("/academicYear");
   };
 
   return (
-    <div className="add-batch-container">
-      <h2>Add Academic Year / Batch</h2>
+    <div className="add-academic-container">
+      <h2>Academic Year</h2>
 
-      <div className="year-selection">
-        <label htmlFor="year">Select Year:</label>
-        <select
-          id="year"
-          name="year"
-          value={selectedYear}
-          onChange={(e) => setSelectedYear(e.target.value)}
-        >
-          <option value="">-- Select Year --</option>
-          {availableYears.map((year) => (
-            <option key={year} value={year}>
-              {year}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="form-row">
+      <div className="year-select">
+        <label htmlFor="year">Year:</label>
         <input
           type="text"
-          name="semester"
-          placeholder="Semester (e.g. 2023 - 2026)"
-          value={newEntry.semester}
-          onChange={handleInputChange}
+          id="year"
+          value={year}
+          onChange={(e) => setYear(e.target.value)}
+          placeholder="e.g. 2025"
         />
-        <input
-          type="date"
-          name="startDate"
-          value={newEntry.startDate}
-          onChange={handleInputChange}
-        />
-        <input
-          type="date"
-          name="endDate"
-          value={newEntry.endDate}
-          onChange={handleInputChange}
-        />
-        <button onClick={handleAddBatch}>Add Batch</button>
+      </div>
+
+      <table className="input-table">
+        <thead>
+          <tr>
+            <th style={{ width: "25%" }}>Batch</th>
+            <th style={{ width: "15%" }}>Sem</th>
+            <th style={{ width: "30%" }}>Start Date</th>
+            <th style={{ width: "30%" }}>End Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, idx) => (
+            <tr key={idx}>
+              <td>
+                <select
+                  value={row.batch}
+                  onChange={(e) => handleChange(idx, "batch", e.target.value)}
+                >
+                  <option value="">Select Batch</option>
+                  {batchOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </td>
+              <td>
+                <select
+                  value={row.semester}
+                  onChange={(e) => handleChange(idx, "semester", e.target.value)}
+                >
+                  {[...Array(8)].map((_, i) => (
+                    <option key={i + 1} value={i + 1}>
+                      {i + 1}
+                    </option>
+                  ))}
+                </select>
+              </td>
+              <td>
+                <input
+                  type="date"
+                  value={row.startDate}
+                  onChange={(e) => handleChange(idx, "startDate", e.target.value)}
+                />
+              </td>
+              <td>
+                <input
+                  type="date"
+                  value={row.endDate}
+                  onChange={(e) => handleChange(idx, "endDate", e.target.value)}
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <div className="button-group">
+        <button onClick={handleAddRow}>Add Row</button>
+        <button onClick={handleSave}>Save</button>
       </div>
     </div>
   );
