@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/AcademicYear.css";
 
-// Convert semester number to Roman numeral
 const toRoman = (num) => {
   const romans = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
   return romans[num - 1] || num;
@@ -20,15 +19,6 @@ const AcademicYear = () => {
 
   const [selectedYear, setSelectedYear] = useState("");
   const navigate = useNavigate();
-
-  const availableYears = Array.from(
-    new Set(
-      data.flatMap((entry) => [
-        new Date(entry.startDate).getFullYear(),
-        new Date(entry.endDate).getFullYear(),
-      ])
-    )
-  ).sort((a, b) => a - b);
 
   const filteredData = data.filter((entry) => {
     const start = new Date(entry.startDate).getFullYear();
@@ -50,19 +40,14 @@ const AcademicYear = () => {
       </div>
 
       <div className="filter-section">
-        <label htmlFor="selectedYear">Filter by Year:</label>
-        <select
+        <label htmlFor="selectedYear">Enter Year:</label>
+        <input
+          type="text"
           id="selectedYear"
           value={selectedYear}
           onChange={(e) => setSelectedYear(e.target.value)}
-        >
-          <option value="">-- All Years --</option>
-          {availableYears.map((year) => (
-            <option key={year} value={year}>
-              {year}
-            </option>
-          ))}
-        </select>
+          placeholder="e.g. 2023"
+        />
       </div>
 
       <table className="academic-table">

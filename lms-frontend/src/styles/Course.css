@@ -1,0 +1,66 @@
+.course{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    max-width: fit-content;
+    border-radius: 10px;
+    box-shadow: 0px 10px 2px 2px #CFFFDC;
+    cursor: pointer;
+    position: relative;
+}
+
+.course #course-details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.course #course-details h3,p{
+    margin: 5px;
+}
+
+.course img{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 300px;
+    height: 200px;
+}
+
+.course .option-btn{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 10px;
+    right: 5px;
+    padding: 5px;
+    height: 30px;
+    width: 30px;
+    border-radius: 100%;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: large;
+    transition: 0.1s ease;
+    &&:hover{
+        transition: 0.1s ease;
+        background-color: rgba(0, 0, 0, 0.25);
+    }
+}
+
+.course .options{
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    background-color: #f5f8ff;
+    border-radius: 5px;
+
+}
+
+.course .options ul{
+    list-style: none;
+    padding: 10px 20px 10px 20px;
+    margin: 0;
+}

@@ -18,6 +18,7 @@ import AcademicYear from './pages/AcademicYear';
 import AddAcademicYear from './pages/AddAcadamicYear';
 import Users from './pages/Users';
 import NewBatchCreation from './pages/NewBatchCreation';
+import Course from './components/Course';
 
 
 function App() {
@@ -33,8 +34,9 @@ function App() {
           <Route path='batches' element={<Batch/>}/>
           <Route path='batches/new' element={<NewBatchCreation/>}/>
          <Route path="/academicYear" element={<AcademicYear />} />
-        <Route path="/academicYear/new" element={<AddAcademicYear />} />
+         <Route path="/academicYear/new" element={<AddAcademicYear />} />
           <Route path='/users' element={<Users/>}/>
+          <Route path='/course' element={<Course/>}/>
         </Route>:
         <Route path="/" element={<Welcome/>}/>
       }
