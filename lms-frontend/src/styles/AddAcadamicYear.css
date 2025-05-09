@@ -1,0 +1,28 @@
+.add-batch-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.year-selection {
+  margin-bottom: 20px;
+}
+
+.year-selection select {
+  padding: 8px;
+  font-size: 14px;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.form-row input,
+.form-row button {
+  padding: 8px;
+  font-size: 14px;
+}

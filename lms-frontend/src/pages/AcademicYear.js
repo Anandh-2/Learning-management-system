@@ -1,118 +1,96 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/AcademicYear.css";
+
+// Convert semester number to Roman numeral
+const toRoman = (num) => {
+  const romans = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
+  return romans[num - 1] || num;
+};
 
 const AcademicYear = () => {
   const [data, setData] = useState([
-    { batch: "2020 - 2022", startYear: 2020, endYear: 2022 },
-    { batch: "2021 - 2023", startYear: 2021, endYear: 2023 },
-    { batch: "2022 - 2025", startYear: 2022, endYear: 2025 },
-    { batch: "2023 - 2026", startYear: 2023, endYear: 2026 },
+    { batch: "2020 - 2022", semester: 1, startDate: "2020-01-01", endDate: "2020-06-30" },
+    { batch: "2020 - 2022", semester: 2, startDate: "2020-07-01", endDate: "2020-12-31" },
+    { batch: "2021 - 2023", semester: 1, startDate: "2021-01-01", endDate: "2021-06-30" },
+    { batch: "2021 - 2023", semester: 2, startDate: "2021-07-01", endDate: "2021-12-31" },
+    { batch: "2022 - 2025", semester: 1, startDate: "2022-01-01", endDate: "2022-06-30" },
+    { batch: "2023 - 2026", semester: 1, startDate: "2023-01-01", endDate: "2023-06-30" },
   ]);
 
-  const [newEntry, setNewEntry] = useState({ startYear: "", endYear: "" });
-  const [showAllBatches, setShowAllBatches] = useState(false);
+  const [selectedYear, setSelectedYear] = useState("");
+  const navigate = useNavigate();
 
-  const currentYear = new Date().getFullYear();
+  const availableYears = Array.from(
+    new Set(
+      data.flatMap((entry) => [
+        new Date(entry.startDate).getFullYear(),
+        new Date(entry.endDate).getFullYear(),
+      ])
+    )
+  ).sort((a, b) => a - b);
 
-  const activeBatches = data.filter(
-    (batch) => currentYear >= batch.startYear && currentYear <= batch.endYear
-  );
+  const filteredData = data.filter((entry) => {
+    const start = new Date(entry.startDate).getFullYear();
+    const end = new Date(entry.endDate).getFullYear();
+    return selectedYear ? start <= selectedYear && end >= selectedYear : true;
+  });
 
-  const tableData = showAllBatches ? data : activeBatches;
-
-  const handleInputChange = (e) => {
-    setNewEntry({ ...newEntry, [e.target.name]: e.target.value });
-  };
-
-  const handleAdd = () => {
-    const start = Number(newEntry.startYear);
-    const end = Number(newEntry.endYear);
-
-    if (!start || !end || start >= end) {
-      alert("Please enter a valid range: start year must be less than end year.");
-      return;
-    }
-
-    const newBatch = `${start} - ${end}`;
-    setData([
-      ...data,
-      {
-        batch: newBatch,
-        startYear: start,
-        endYear: end,
-      },
-    ]);
-    setNewEntry({ startYear: "", endYear: "" });
-  };
-
-  const toggleAllBatches = () => {
-    setShowAllBatches((prev) => !prev);
+  const handleNavigateToAddBatch = () => {
+    navigate("/academicYear/new");
   };
 
   return (
     <div className="academic-container">
-      <h2 className="academic-title">Academic Years</h2>
-
-      <div className="nav-bar">
-        <button
-          className={`nav-button ${showAllBatches ? "active" : ""}`}
-          onClick={toggleAllBatches}
-        >
-          {showAllBatches ? "Show Active Batches" : "Show All Batches"}
+      <div className="header">
+        <h2>Academic Years</h2>
+        <button onClick={handleNavigateToAddBatch} className="add-button">
+          Add New Batch
         </button>
       </div>
 
-      <div className="table-wrapper">
-        <table className="academic-table">
-          <thead>
-            <tr>
-              <th>Batch</th>
-              <th>Start Year</th>
-              <th>End Year</th>
-            </tr>
-          </thead>
-          <tbody>
-            {tableData.map((item, idx) => (
-              <tr key={idx}>
-                <td>{item.batch}</td>
-                <td>{item.startYear}</td>
-                <td>{item.endYear}</td>
-              </tr>
-            ))}
-
-            {!showAllBatches && (
-              <tr className="input-row">
-                  <td className="disabled-cell">create new batch</td>
-                <td>
-                  <input
-                    type="date"
-                    name="startYear"
-                    value={newEntry.startYear}
-                    onChange={handleInputChange}
-                    placeholder="Start year"
-                    min="2000"
-                    max="2100"
-                  />
-                </td>
-                <td>
-                  <div className="end-year-cell">
-                    <input
-                      type="date"
-                      name="endYear"
-                      value={newEntry.endYear}
-                      onChange={handleInputChange}
-                      placeholder="End year"
-                      min="2000"
-                      max="2100"
-                    />
-                    <button onClick={handleAdd}>Add</button>
-                  </div>
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+      <div className="filter-section">
+        <label htmlFor="selectedYear">Filter by Year:</label>
+        <select
+          id="selectedYear"
+          value={selectedYear}
+          onChange={(e) => setSelectedYear(e.target.value)}
+        >
+          <option value="">-- All Years --</option>
+          {availableYears.map((year) => (
+            <option key={year} value={year}>
+              {year}
+            </option>
+          ))}
+        </select>
       </div>
+
+      <table className="academic-table">
+        <thead>
+          <tr>
+            <th>Batch</th>
+            <th>Semester</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredData.length > 0 ? (
+            filteredData.map((item, index) => (
+              <tr key={index}>
+                <td>{item.batch}</td>
+                <td>{toRoman(item.semester)}</td>
+                <td>{item.startDate}</td>
+                <td>{item.endDate}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="4">No data available for selected year.</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
     </div>
   );
 };
