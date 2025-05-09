@@ -5,7 +5,6 @@ import Register from './pages/Register';
 import Welcome from './pages/Welcome';
 import PrivateRoute from './components/PrivateRoute';
 import StudentDashboard from './pages/StudentDashboard';
-import CoursePage from './pages/CoursePage';
 import AdminDashboard from './pages/AdminDashboard';
 import { useAuth } from './context/AuthContext';
 import RoleBasedDashboard from './components/RoleBasedDashboard';
@@ -18,6 +17,7 @@ import AcademicYear from './pages/AcademicYear';
 import AddAcademicYear from './pages/AddAcadamicYear';
 import Users from './pages/Users';
 import NewBatchCreation from './pages/NewBatchCreation';
+import CourseLayout from './pages/CourseLayout';
 
 
 function App() {
@@ -40,7 +40,9 @@ function App() {
       }
         <Route path="/register" element={<Register/>}/>
         <Route path="/login" element={<Login/>}/>
-      
+        <Route path='/course' element={<CourseLayout/>}>
+          <Route index element={<div>Nothing open</div>}/>
+        </Route>
       </Routes>
     </div>
   );

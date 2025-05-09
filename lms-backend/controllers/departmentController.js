@@ -26,7 +26,7 @@ exports.assignHOD = async (req, res) => {
     const departmentId = req.params.departmentId;
     const batchId = req.params.batchId;
     await assignHod(instructorId, batchId, departmentId);
-    return res.status(200).json({'New HOD assigned'});
+    return res.status(200).json({message:'New HOD assigned'});
   } catch (err) {
     return res.status(500).json({ message: "Server error" });
   }

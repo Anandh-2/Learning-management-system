@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import CourseImg from '../images/Course.jpg'
-// import '../styles/Course.css'
+import '../styles/Course.css'
 import { useNavigate } from 'react-router-dom'
 import { SlOptionsVertical } from "react-icons/sl";
 
