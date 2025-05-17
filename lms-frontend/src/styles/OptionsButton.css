@@ -1,0 +1,39 @@
+.opns-btn{
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.opns-btn .cancel-btn,.save-btn,.edit-btn{
+    border: none;
+    outline: none;
+    height: 60px;
+    width: 60px;
+    border-radius: 100%;
+    font-size: 30px;
+    background-color: #253D2C;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover{
+        background-color: #355f42;
+    }
+}
+
+.opns-btn .cancel-btn{
+    transform: translateY(20px);
+    transition: opacity 0.3s, transform 0.3s;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.opns-btn .cancel-btn.show{
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}

@@ -24,7 +24,7 @@ const AddAcademicYear = () => {
 
   const handleSave = () => {
     console.log("Saved Data:", { year, rows });
-    navigate("/academicYear");
+    navigate("/admin/academicyear");
   };
 
   return (
@@ -38,7 +38,7 @@ const AddAcademicYear = () => {
           id="year"
           value={year}
           onChange={(e) => setYear(e.target.value)}
-          placeholder="e.g. 2025"
+          placeholder="e.g. 2024 - 2025"
         />
       </div>
 

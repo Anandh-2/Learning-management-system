@@ -9,9 +9,173 @@
     /*border-right: 5px solid #CFFFDC;*/
 }
 
+.content-bar .bar-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 20px;
+}
+
+.content-bar .bar-top .bar-top-right{
+    display: flex;
+    gap: 2px;
+}
+
+.bar-top-btns{
+    height: 20px;
+    width: 20px;
+    padding: 8px;
+    border-radius: 10px;
+    &:hover{
+        background-color: #355f42;
+        cursor: pointer;
+    }
+}
+
 .content-bar .module{
     padding-top: 10px;
     padding-bottom: 10px;
     border-top: 1px solid #CFFFDC;
     font-size: larger;
+}
+
+.module{
+    cursor: pointer;
+    position: relative;
+}
+
+.module .list{
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    padding-left: 20px;
+}
+
+.module .list-itm{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    opacity: calc(0.8);
+}
+
+.module .module-title{
+    display: flex;
+    justify-content: space-between;
+}
+
+.module .module-title .module-opns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    padding: 3px;
+    background-color: transparent;
+    color: white;
+    outline: none;
+    border: none;
+
+    &:hover{
+        background-color: #355f42;
+    }
+}
+
+.module .module-options{
+    position: absolute;
+    top: 20px;
+    left: calc(100%);
+    background-color: #CFFFDC;
+    color: #253D2C;
+    border-radius: 10px;
+    padding: 0px 20px 0px 20px;    
+}
+
+.module .module-options-list{
+    display: flex;
+    flex-direction: column;
+    width: 120px;
+    list-style: none;
+    padding-inline-start: 0px;
+    justify-content: center;
+}
+
+.module .module-options-list li{
+    padding: 5px;
+}
+
+.module .module-options-list li:not(:last-child){
+    border-bottom: 1px solid white;
+}
+
+.module-modal-bg{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 900;
+    overflow: hidden;
+}
+
+.module-modal{
+    position: fixed;
+    top: calc(50%);
+    right: calc(50%);
+    transform: translate(50%,-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    color: #253D2C;
+    z-index: 1000;
+}
+
+.module-modal input{
+    height: 30px;
+    width: 250px;
+    padding: 10px;
+    border: 1px solid #253D2C;
+    padding: 0px 10px 0px 10px;
+    font-size: 1em;
+    outline: none;
+}
+
+.module-modal form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.module-modal #module-action-btns{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    width: 100%;
+}
+
+.module-modal #module-action-btns button{
+    background-color: #253D2C;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-size: 1em;
+}
+
+.module-modal .form-input{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.module-modal .form-input label{
+    font-size: large;
+    font-weight: 600;
 }

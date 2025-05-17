@@ -1,40 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/VideoPage.css';
+import OptionsButton from '../components/OptionsButton';
+import { useParams } from 'react-router-dom';
 
-const videos = [
-  { title: "Intro to React", url: "https://www.youtube.com/embed/Ke90Tje7VS0" },
-  { title: "Advanced JavaScript", url: "https://www.youtube.com/embed/Oe421EPjeBE" },
-  { title: "Node.js Tutorial", url: "https://www.youtube.com/embed/TlB_eWDSMt4" },
-];
+function VideoPage() {
+  const content = {
+    title:'My first video',
+    data: 'code'
+  }
 
-function Videopage() {
-  const [selectedVideo, setSelectedVideo] = useState(null);
-
-  useEffect(() => {
-    setSelectedVideo(videos[0].url); // Auto-select first video
-  }, []);
-
-  const handleVideoClick = (url) => {
-    setSelectedVideo(url);
-  };
-
+  const [isEditing, setIsEditing] = useState(false);
+  const {contentId} = useParams();
   return (
     <div className="video-page">
-      <div className="video-content">
-        {selectedVideo ? (
-          <iframe
-            src={selectedVideo}
-            title="Video Player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        ) : (
-          <p className="no-video-selected">Select a video to watch.</p>
-        )}
-      </div>
+      <div contentEditable={isEditing?true:false} className={isEditing?'editable-div':''} id='title'>{content.title}</div>
+      <iframe
+        title={content.title}
+        src={`https://youtube.com/embed/${contentId}?rel=0`}
+        allowFullScreen
+        frameBorder={0}
+        className='video'
+      ></iframe>
+      <OptionsButton isEditing={isEditing} setIsEditing={setIsEditing}/>
     </div>
   );
 }
 
-export default Videopage;
+export default VideoPage;

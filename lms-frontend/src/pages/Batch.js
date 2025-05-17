@@ -15,7 +15,7 @@ function Batch() {
       setIsLoading(true);
       const data = await getBatches();
       setBatches(data);
-      setIsLoading(false)
+      setIsLoading(false);
     }
     loadBatches();
   }, []);
@@ -23,7 +23,6 @@ function Batch() {
   return (
     <div className="batches">
       <div className="batch-header">
-        <h2 className="batches-title">Batches</h2>
         <button className="add-batch-btn" onClick={() => navigate('new')}>+ Add Batch</button>
       </div>
       {isLoading ? <div>Loading</div>
