@@ -30,8 +30,8 @@ function Sidebar() {
       )}
       {user.role === "instructor" && (
         <ul className="options">
-          <li><span className="opn"><FaHome/>Dashboard</span></li>
-          <li><span className="opn"><FaBookOpen />Courses</span></li>
+          <li><span className="opn" onClick={()=>navigate('/instructor')}><FaHome/>Dashboard</span></li>
+          <li><span className="opn" onClick={()=>navigate('courses')}><FaBookOpen />Courses</span></li>
         </ul>
       )}
       {user.role === "hod" && (
@@ -44,12 +44,12 @@ function Sidebar() {
       )}
       {user.role === "admin" && (
         <ul className="options">
-          <li><span className="opn" onClick={()=>navigate('/')}><FaHome/>Dashboard</span></li>
-          <li><span className="opn" onClick={()=>navigate('/departments')}><FaLayerGroup/>Departments</span></li>
-          <li><span className="opn" onClick={()=>navigate('/batches')}><FaGraduationCap/>Batches</span></li>
-          <li><span className="opn"onClick={()=>navigate('/academicYear')}><FaCalendar/>Academic Years</span></li>
-          <li><span className="opn"onClick={()=>navigate('/users')}><FaUserFriends />Users</span></li>
-          <li><span className="opn"><FaBookReader />Courses</span></li>
+          <li><span className="opn" onClick={()=>navigate('/admin')}><FaHome/>Dashboard</span></li>
+          <li><span className="opn" onClick={()=>navigate('/admin/departments')}><FaLayerGroup/>Departments</span></li>
+          <li><span className="opn" onClick={()=>navigate('/admin/batches')}><FaGraduationCap/>Batches</span></li>
+          <li><span className="opn"onClick={()=>navigate('/admin/academicYear')}><FaCalendar/>Academic Years</span></li>
+          <li><span className="opn"onClick={()=>navigate('/admin/users')}><FaUserFriends />Users</span></li>
+          <li><span className="opn" onClick={()=>navigate('/admin/courses')}><FaBookReader />Courses</span></li>
         </ul>
       )}
     </div>

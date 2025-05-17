@@ -4,13 +4,12 @@ import '../styles/Course.css'
 import { useNavigate } from 'react-router-dom'
 import { SlOptionsVertical } from "react-icons/sl";
 
-function Course() {
-  const course = { _id: '1', title: "Java", instructor: "Anandh" }; 
+function Course({course}) {
   const navigate = useNavigate();
   const [isOpOpen, setIsOpOpen] = useState(false);
 
   return (
-    <div className='course' onClick={() => navigate(`/${course._id}`)}>
+    <div className='course' onClick={() => navigate(`/course/${course._id}`)}>
       <button className='option-btn' onClick={(e) => { e.stopPropagation(); setIsOpOpen(prev => !prev); }}>
         <SlOptionsVertical />
       </button>

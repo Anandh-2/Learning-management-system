@@ -61,7 +61,7 @@ h2 {
   gap: 12px;
 }
 
-button {
+.button-group {
   padding: 10px 16px;
   background-color: #007bff;
   color: white;
@@ -72,6 +72,6 @@ button {
   transition: background-color 0.2s;
 }
 
-button:hover {
+.button-group:hover {
   background-color: #0056b3;
 }

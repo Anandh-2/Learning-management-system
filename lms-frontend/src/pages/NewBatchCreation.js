@@ -86,7 +86,7 @@ function NewBatchCreation() {
           </tbody>
         </table>
 
-        <button type="submit">Add Batch</button>
+        <button className='button' type="submit">Add Batch</button>
       </form>
 
       {showModal && (
@@ -100,8 +100,8 @@ function NewBatchCreation() {
               onChange={(e) => setNewDeptName(e.target.value)}
               />
             <div className="modal-actions">
-              <button onClick={handleAddDepartment}>Add</button>
-              <button onClick={() => setShowModal(false)}>Cancel</button>
+              <button className='button' onClick={handleAddDepartment}>Add</button>
+              <button className='button' onClick={() => setShowModal(false)}>Cancel</button>
             </div>
           </div>
         </div>

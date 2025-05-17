@@ -11,7 +11,8 @@ exports.createCourse = async(req, res)=>{
             title,
             instructor:req.user.id,
             department:req.user.dept,
-            semester
+            semester,
+            modules:[],
         })
         await newCourse.save();
         return res.status(201).json({message:"Course creation successful", course:newCourse});
@@ -41,7 +42,7 @@ exports.getEnrolledCourses = async(req,res)=>{
 
 exports.getCreatedCourses = async(req,res)=>{
     try{
-        const courses = await Course.find({instructor:req.user.id});
+        const courses = await Course.find({instructor:req.user.id}).populate('semester');
         return res.status(200).json({courses});
     }catch(err){
         console.log(err);

@@ -8,7 +8,7 @@ function StudentDashboard() {
   
   return (
     <div className="dashboard">
-      <CourseList title='Your Courses' fetchCourses={getEnrolledCourses}/>
+      <CourseList courses={[]}/>
     </div>
   );
 }

@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/AcademicYear.css";
+import { BiEdit } from "react-icons/bi";
+
 
 const toRoman = (num) => {
   const romans = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
@@ -8,46 +10,104 @@ const toRoman = (num) => {
 };
 
 const AcademicYear = () => {
-  const [data, setData] = useState([
-    { batch: "2020 - 2022", semester: 1, startDate: "2020-01-01", endDate: "2020-06-30" },
-    { batch: "2020 - 2022", semester: 2, startDate: "2020-07-01", endDate: "2020-12-31" },
-    { batch: "2021 - 2023", semester: 1, startDate: "2021-01-01", endDate: "2021-06-30" },
-    { batch: "2021 - 2023", semester: 2, startDate: "2021-07-01", endDate: "2021-12-31" },
-    { batch: "2022 - 2025", semester: 1, startDate: "2022-01-01", endDate: "2022-06-30" },
-    { batch: "2023 - 2026", semester: 1, startDate: "2023-01-01", endDate: "2023-06-30" },
-  ]);
+  const [academicYears, setAcademicYears] = useState([]);
 
-  const [selectedYear, setSelectedYear] = useState("");
-  const navigate = useNavigate();
-
-  const filteredData = data.filter((entry) => {
-    const start = new Date(entry.startDate).getFullYear();
-    const end = new Date(entry.endDate).getFullYear();
-    return selectedYear ? start <= selectedYear && end >= selectedYear : true;
+  const [isLoading, setIsLoading] = useState({
+    academicYears: false,
+    yearData: false,
   });
 
+  const [yearData, setYearData] = useState([]);
+
+  const navigate = useNavigate();
+
   const handleNavigateToAddBatch = () => {
-    navigate("/academicYear/new");
+    navigate("/admin/academicyear/new");
   };
+
+  const handleYearChange = (id) => {
+    console.log(id);
+    if(id===''){
+      setYearData([]);
+      return;
+    }
+
+    setIsLoading(prev=>({...prev, yearData:true}));
+    
+    const dupSemData = [
+      {
+        _id:'1',
+        batch:{name:'2022'},
+        semNo:6,
+        startDate:'02-01-2025',
+        endDate:'30-06-2025'
+      },
+      {
+        _id:'2',
+        batch:{name:'2021'},
+        semNo:8,
+        startDate:'02-01-2025',
+        endDate:'30-06-2025'
+      },
+    ]
+
+    const year = academicYears.find((data)=>{
+      return data._id===id;
+    });
+
+    console.log(year);
+    
+    const data = dupSemData.filter((data)=>{
+      return year.semesters.includes(data._id);
+    })
+    
+    setYearData(data);
+    setIsLoading(prev=>({...prev, yearData:false}));
+  };
+
+  useEffect(() => {
+    setIsLoading(prev=>({...prev, academicYears:true}));
+    const data = [
+      {
+        _id:'100',
+        name:"2022 - 2023",
+        semesters:['1','2','3']
+      },
+      {
+        _id:'101',
+        name:"2023 - 2024",
+        semesters:['4','5','6']
+      },
+      {
+        _id:'102',
+        name:"2024 - 2025",
+        semesters:['7','8','9']
+      }
+    ]
+    setAcademicYears(data);
+    console.log(academicYears);
+    setIsLoading(prev=>({...prev, academicYears:false}));
+  }, []);
 
   return (
     <div className="academic-container">
       <div className="header">
-        <h2>Academic Years</h2>
-        <button onClick={handleNavigateToAddBatch} className="add-button">
-          Add New Batch
-        </button>
-      </div>
-
-      <div className="filter-section">
-        <label htmlFor="selectedYear">Enter Year:</label>
-        <input
-          type="text"
+        <div>
+        <label htmlFor="selectedYear">Choose Year : </label>
+        <select
+          name="selectedYear"
           id="selectedYear"
-          value={selectedYear}
-          onChange={(e) => setSelectedYear(e.target.value)}
-          placeholder="e.g. 2023"
-        />
+          onChange={(e) => handleYearChange(e.target.value)}
+        >
+            <option value={""}>Select One</option>
+          {academicYears.map((year, index)=>{
+            return <option key={index} value={year._id}>{year.name}</option>
+          })}
+        </select>
+        </div>
+        <button onClick={handleNavigateToAddBatch} className="add-button">
+          Add New Academic Year
+        </button>
       </div>
 
       <table className="academic-table">
@@ -60,13 +120,13 @@ const AcademicYear = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredData.length > 0 ? (
-            filteredData.map((item, index) => (
+          {yearData.length > 0 ? (
+            yearData.map((item, index) => (
               <tr key={index}>
-                <td>{item.batch}</td>
-                <td>{toRoman(item.semester)}</td>
-                <td>{item.startDate}</td>
-                <td>{item.endDate}</td>
+                <td>{item.batch.name}</td>
+                <td>{toRoman(item.semNo)}</td>
+                <td><button><BiEdit/></button>{item.startDate}</td>
+                <td><button><BiEdit/></button>{item.endDate}</td>
               </tr>
             ))
           ) : (
