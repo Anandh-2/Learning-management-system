@@ -2,19 +2,26 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/AcademicYear.css";
 import { BiEdit } from "react-icons/bi";
-
-
-const toRoman = (num) => {
-  const romans = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
-  return romans[num - 1] || num;
-};
+import {
+  deleteAcademicYear,
+  getAcademicYearById,
+  getAllAcademicYears,
+  updateSemester,
+} from "../api/Api";
 
 const AcademicYear = () => {
   const [academicYears, setAcademicYears] = useState([]);
 
+  const [currId, setCurrId] = useState("");
+
   const [isLoading, setIsLoading] = useState({
     academicYears: false,
     yearData: false,
+  });
+
+  const [editableData, setEditableData] = useState({
+    id: "",
+    date: "",
   });
 
   const [yearData, setYearData] = useState([]);
@@ -25,85 +32,103 @@ const AcademicYear = () => {
     navigate("/admin/academicyear/new");
   };
 
-  const handleYearChange = (id) => {
-    console.log(id);
-    if(id===''){
-      setYearData([]);
+  const handleDateChange = async (id, field, value) => {
+    try {
+      const sem = yearData.find((item) => item._id === id);
+      if (new Date() >= new Date(value)) {
+        alert("New date should be greater than today");
+        return;
+      }
+      const updatedData = {
+        ...sem,
+        [field]: new Date(value).toISOString(),
+      };
+      updateSemester(sem._id, updatedData);
+      setYearData((prev) =>
+        prev.map((item) => (item._id === sem._id ? updatedData : item))
+      );
+    } catch (err) {
+      alert("Error in updating semester");
+      console.log(err);
+    } finally {
+      setEditableData({ id: "", date: "" });
+    }
+  };
+
+  const handleYearChange =  (id) => {
+    setCurrId(id);
+  };
+
+  const handleDeleteAcademicYear = async () => {
+    if (currId === "") {
       return;
     }
-
-    setIsLoading(prev=>({...prev, yearData:true}));
-    
-    const dupSemData = [
-      {
-        _id:'1',
-        batch:{name:'2022'},
-        semNo:6,
-        startDate:'02-01-2025',
-        endDate:'30-06-2025'
-      },
-      {
-        _id:'2',
-        batch:{name:'2021'},
-        semNo:8,
-        startDate:'02-01-2025',
-        endDate:'30-06-2025'
-      },
-    ]
-
-    const year = academicYears.find((data)=>{
-      return data._id===id;
-    });
-
-    console.log(year);
-    
-    const data = dupSemData.filter((data)=>{
-      return year.semesters.includes(data._id);
-    })
-    
-    setYearData(data);
-    setIsLoading(prev=>({...prev, yearData:false}));
+    try {
+      const confirmDelete = window.confirm(
+        "Are you sure you want to delete this academic year? This action cannot be undone."
+      );
+      if (confirmDelete) {
+        await deleteAcademicYear(currId);
+        setCurrId("");
+        const data = await getAllAcademicYears();
+        setAcademicYears(data);
+      }
+    } catch (err) {
+      alert("Error deleting academic year");
+      console.log(err);
+    }
   };
 
   useEffect(() => {
-    setIsLoading(prev=>({...prev, academicYears:true}));
-    const data = [
-      {
-        _id:'100',
-        name:"2022 - 2023",
-        semesters:['1','2','3']
-      },
-      {
-        _id:'101',
-        name:"2023 - 2024",
-        semesters:['4','5','6']
-      },
-      {
-        _id:'102',
-        name:"2024 - 2025",
-        semesters:['7','8','9']
-      }
-    ]
-    setAcademicYears(data);
-    console.log(academicYears);
-    setIsLoading(prev=>({...prev, academicYears:false}));
+    const fetchAcademicYears = async () => {
+      setIsLoading((prev) => ({ ...prev, academicYears: true }));
+      const data = await getAllAcademicYears();
+      setAcademicYears(data);
+      setIsLoading((prev) => ({ ...prev, academicYears: false }));
+    };
+    fetchAcademicYears();
   }, []);
+
+  useEffect(() => {
+    console.log(currId);
+    if (currId === "") {
+      setYearData([]);
+      return;
+    }
+    const fetchData = async () => {
+      setIsLoading((prev) => ({ ...prev, yearData: true }));
+      const data = await getAcademicYearById(currId);
+      console.log(data);
+      setYearData(data.semesters);
+      setIsLoading((prev) => ({ ...prev, yearData: false }));
+    };
+    fetchData();
+  }, [currId]);
 
   return (
     <div className="academic-container">
-      <div className="header">
+      <div className="academic-header">
         <div>
-        <label htmlFor="selectedYear">Choose Year : </label>
-        <select
-          name="selectedYear"
-          id="selectedYear"
-          onChange={(e) => handleYearChange(e.target.value)}
-        >
-            <option value={""}>Select One</option>
-          {academicYears.map((year, index)=>{
-            return <option key={index} value={year._id}>{year.name}</option>
-          })}
-        </select>
+          <label
+            htmlFor="selectedYear"
+            style={{ fontSize: "16px", fontWeight: "bold" }}
+          >
+            Choose Year :{" "}
+          </label>
+          <select
+            name="selectedYear"
+            id="selectedYear"
+            onChange={(e) => handleYearChange(e.target.value)}
+          >
+            <option value={""}>Select one</option>
+            {academicYears.map((year, index) => {
+              return (
+                <option key={index} value={year._id}>
+                  {year.name}
+                </option>
+              );
+            })}
+          </select>
         </div>
         <button onClick={handleNavigateToAddBatch} className="add-button">
           Add New Academic Year
@@ -120,13 +145,97 @@ const AcademicYear = () => {
           </tr>
         </thead>
         <tbody>
-          {yearData.length > 0 ? (
+          {isLoading.yearData ? (
+            <tr>
+              <td colSpan="4">Loading...</td>
+            </tr>
+          ) : yearData.length > 0 ? (
             yearData.map((item, index) => (
               <tr key={index}>
                 <td>{item.batch.name}</td>
-                <td>{toRoman(item.semNo)}</td>
-                <td><button><BiEdit/></button>{item.startDate}</td>
-                <td><button><BiEdit/></button>{item.endDate}</td>
+                <td>{item.semNum}</td>
+                <td>
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "10px",
+                      alignItems: "center",
+                    }}
+                  >
+                    <button
+                      className="edit-button"
+                      disabled={new Date(item.startDate) <= new Date()}
+                      onClick={() =>
+                        setEditableData({ id: item._id, date: "start" })
+                      }
+                      onBlur={() => setEditableData({ id: "", date: "" })}
+                    >
+                      <BiEdit />
+                    </button>
+                    {editableData.id === item._id &&
+                    editableData.date === "start" ? (
+                      <input
+                        type="date"
+                        value={
+                          new Date(item.startDate).toISOString().split("T")[0]
+                        }
+                        onChange={(e) =>
+                          handleDateChange(
+                            item._id,
+                            "startDate",
+                            e.target.value
+                          )
+                        }
+                        onMouseDown={(e) => e.preventDefault()}
+                      />
+                    ) : (
+                      new Date(item.startDate).toLocaleDateString("en-IN", {
+                        year: "numeric",
+                        month: "long",
+                        day: "2-digit",
+                      })
+                    )}
+                  </div>
+                </td>
+                <td>
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "10px",
+                      alignItems: "center",
+                    }}
+                  >
+                    <button
+                      className="edit-button"
+                      disabled={new Date(item.endDate) <= new Date()}
+                      onClick={() =>
+                        setEditableData({ id: item._id, date: "end" })
+                      }
+                      onBlur={() => setEditableData({ id: "", date: "" })}
+                    >
+                      <BiEdit />
+                    </button>
+                    {editableData.id === item._id &&
+                    editableData.date === "end" ? (
+                      <input
+                        type="date"
+                        value={
+                          new Date(item.endDate).toISOString().split("T")[0]
+                        }
+                        onChange={(e) =>
+                          handleDateChange(item._id, "endDate", e.target.value)
+                        }
+                        onMouseDown={(e) => e.preventDefault()}
+                      />
+                    ) : (
+                      new Date(item.endDate).toLocaleDateString("en-IN", {
+                        year: "numeric",
+                        month: "long",
+                        day: "2-digit",
+                      })
+                    )}
+                  </div>
+                </td>
               </tr>
             ))
           ) : (
@@ -136,6 +245,9 @@ const AcademicYear = () => {
           )}
         </tbody>
       </table>
+      <button onClick={handleDeleteAcademicYear} className="delete-button">
+        Delete
+      </button>
     </div>
   );
 };

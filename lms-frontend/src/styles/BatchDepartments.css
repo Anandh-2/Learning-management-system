@@ -1,0 +1,49 @@
+.batch-departments{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+}
+
+.batch-departments .delete-batch{
+  align-self: flex-end;
+  background-color: red;
+  color: white; 
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.batch-departments table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.batch-departments th,
+.batch-departments td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+.batch-departments th {
+    background-color: #f4f4f4;
+    text-align: left;
+}
+
+.batch-departments tr:hover{
+    background-color: #fafafa;
+}
+
+.batch-departments .action-btns{
+    display: flex;
+    gap: 10px;
+}
+
+.batch-departments .action-btn{
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}

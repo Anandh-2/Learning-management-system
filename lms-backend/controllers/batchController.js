@@ -45,3 +45,18 @@ exports.getAllBatches = async(req,res)=>{
         return res.status(500).json({ message: "Server error" });
     }
 }
+
+exports.getActiveBatches = async(req,res)=>{
+    try{
+        const today = new Date();
+        const batches = await Batch.find({
+            $or: [
+                { endDate: { $gt: today } },
+                { endDate: { $exists: false } }
+            ]
+        });
+        return res.status(200).json({batches});
+    }catch(err){
+        return res.status(500).json({ message: "Server error" });
+    }
+}

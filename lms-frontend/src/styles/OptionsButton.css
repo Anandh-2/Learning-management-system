@@ -1,4 +1,4 @@
-.opns-btn{
+.opns-btns{
     position: fixed;
     bottom: 50px;
     right: 50px;
@@ -7,7 +7,7 @@
     gap: 10px;
 }
 
-.opns-btn .cancel-btn,.save-btn,.edit-btn{
+.opns-btns button{
     border: none;
     outline: none;
     height: 60px;
@@ -25,14 +25,14 @@
     }
 }
 
-.opns-btn .cancel-btn{
+.opns-btns .hidden-btn{
     transform: translateY(20px);
     transition: opacity 0.3s, transform 0.3s;
     opacity: 0;
     pointer-events: none;
 }
 
-.opns-btn .cancel-btn.show{
+.opns-btns .hidden-btn.show{
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;

@@ -1,15 +1,27 @@
 const express = require('express');
 const router = express.Router();
-const {auth, isInstructor}=require('../middlewares/Auth');
-const { createCourse, getEnrolledCourses, getCreatedCourses } = require('../controllers/courseController');
-const {getModules, createModule} = require('../controllers/moduleController')
+const {auth, isInstructor, roleMiddleware}=require('../middlewares/Auth');
+const { createCourse, getEnrolledCourses, getCreatedCourses, getCourseById, reorderCourse, deleteCourse } = require('../controllers/courseController');
+const {getModules, createModule, deleteModule} = require('../controllers/moduleController');
+const { createContent, getContentById, saveVideoContent, deleteContent } = require('../controllers/contentController');
 
-router.post("/courses",auth,isInstructor,createCourse);
+const multer = require('multer');
+const upload = multer({dest:'uploads/'});
+
+router.post("/courses",auth,roleMiddleware("instructor","hod"),createCourse);
 //router.post();
-router.post("/:courseId/modules",auth,isInstructor,createModule);
-router.get("/enrolled-courses",auth,getEnrolledCourses);
-router.get("/created-courses",auth,getCreatedCourses);
+router.post("/courses/:courseId/modules",auth,roleMiddleware("instructor","hod"),createModule);
+router.post("/modules/:moduleId/contents", auth, roleMiddleware("instructor","admin"),createContent);
+router.get("/courses/enrolled-courses",auth,getEnrolledCourses);
+router.get("/courses/created-courses",auth,getCreatedCourses);
+router.get("/courses/:courseId", auth, getCourseById);
+router.get('/contents/:contentId',auth,getContentById);
 // router.get("/:courseId/modules",auth,getModules);
+router.put('/contents/:contentId',auth,roleMiddleware("instructor","hod"),upload.single('video'),saveVideoContent);
+router.delete('/modules/:moduleId/contents/:contentId',auth,deleteContent);
+router.delete('/courses/:courseId/modules/:moduleId', auth, deleteModule);
+router.delete('/courses/:courseId',auth,deleteCourse);
+router.patch('/courses/:courseId/reorder',auth,reorderCourse);
 
 
 module.exports=router;

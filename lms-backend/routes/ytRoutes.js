@@ -8,6 +8,6 @@ const {auth, isInstructor, isAdmin}=require("../middlewares/Auth");
 router.get("/upload/auth",ytOauth);
 router.get("/upload/auth/callback",ytOauthCallback);
 
-router.post("/upload",upload.single("video"),uploadVid);
+// router.post("/upload",upload.single("video"),uploadVid);
 
 module.exports=router;

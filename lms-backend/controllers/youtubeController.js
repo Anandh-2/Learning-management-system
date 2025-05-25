@@ -49,7 +49,7 @@ exports.ytOauthCallback = async(req, res) => {
     }
 };
 
-exports.uploadVid = async (req, res) => {
+/*exports.uploadVid = async (req, res) => {
     if(!req.file){
         return res.status(400).send("No video uploaded");
     }
@@ -87,4 +87,4 @@ exports.uploadVid = async (req, res) => {
         console.error("Error uploading video: ", err);
         res.status(500).send("Upload failed");
     }
-};
+};*/

@@ -9,7 +9,7 @@ import { FaGraduationCap } from "react-icons/fa6";
 import { FaCalendar } from "react-icons/fa";
 import { FaUserFriends } from "react-icons/fa";
 import { FaBookReader } from "react-icons/fa";
-
+import { FaUserPlus } from "react-icons/fa";
 
 
 
@@ -24,31 +24,32 @@ function Sidebar() {
       </div>
       {user.role === "student" && (
         <ul className="options">
-          <li><span className="opn"><FaHome/>Dashboard</span></li>
-          <li><span className="opn"><FaBookOpen />Courses</span></li>
+          <li><span className="opn" onClick={()=>navigate('/student')}><FaHome/>Dashboard</span></li>
+          <li><span className="opn" onClick={()=>navigate('/student/courses')}><FaBookReader />Courses</span></li>
         </ul>
       )}
       {user.role === "instructor" && (
         <ul className="options">
           <li><span className="opn" onClick={()=>navigate('/instructor')}><FaHome/>Dashboard</span></li>
-          <li><span className="opn" onClick={()=>navigate('courses')}><FaBookOpen />Courses</span></li>
+          <li><span className="opn" onClick={()=>navigate('/instructor/courses')}><FaBookReader />Courses</span></li>
         </ul>
       )}
       {user.role === "hod" && (
         <ul className="options">
-          <li><span className="opn"><FaHome/>Dashboard</span></li>
-          <li><span className="opn"><FaBookOpen />Courses</span></li>
-          <li><span className="opn">Students</span></li>
-          <li><span className="opn">Requests</span></li>
+          <li><span className="opn" onClick={()=>navigate('/hod')}><FaHome/>Dashboard</span></li>
+          <li><span className="opn" onClick={()=>navigate('/hod/courses')}><FaBookReader />Courses</span></li>
+          <li><span className="opn" onClick={()=>navigate('/hod/users')}><FaUserFriends />Users</span></li>
+          <li><span className="opn" onClick={()=>navigate('/hod/requests')}><FaUserPlus />Requests</span></li>
         </ul>
       )}
       {user.role === "admin" && (
         <ul className="options">
           <li><span className="opn" onClick={()=>navigate('/admin')}><FaHome/>Dashboard</span></li>
-          <li><span className="opn" onClick={()=>navigate('/admin/departments')}><FaLayerGroup/>Departments</span></li>
+          <li><span className="opn" onClick={()=>navigate('/admin/departments')}><FaLayerGroup />Departments</span></li>
           <li><span className="opn" onClick={()=>navigate('/admin/batches')}><FaGraduationCap/>Batches</span></li>
-          <li><span className="opn"onClick={()=>navigate('/admin/academicYear')}><FaCalendar/>Academic Years</span></li>
+          <li><span className="opn"onClick={()=>navigate('/admin/academicyear')}><FaCalendar/>Academic Years</span></li>
           <li><span className="opn"onClick={()=>navigate('/admin/users')}><FaUserFriends />Users</span></li>
+          <li><span className="opn"onClick={()=>navigate('/admin/requests')}><FaUserPlus />Requests</span></li>
           <li><span className="opn" onClick={()=>navigate('/admin/courses')}><FaBookReader />Courses</span></li>
         </ul>
       )}

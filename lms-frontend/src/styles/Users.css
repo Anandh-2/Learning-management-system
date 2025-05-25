@@ -1,58 +1,75 @@
-.user-table-container {
-    padding: 24px;
-    font-family: sans-serif;
-  }
-  
-  .table-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 16px;
-  }
-  
-  .filters {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-  
-  .filters select {
-    padding: 8px;
-    font-size: 14px;
-  }
-  
-  .table-wrapper {
-    overflow-x: auto;
-  }
-  
-  .user-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  }
-  
-  .user-table th,
-  .user-table td {
-    padding: 12px 16px;
-    border-bottom: 1px solid #eee;
-    text-align: left;
-  }
-  
-  .user-table thead {
-    background-color: #f5f5f5;
-  }
-  
-  .user-table tr:hover {
-    background-color: #fafafa;
-  }
-  
-  .no-users {
-    text-align: center;
-    padding: 16px;
-    color: #777;
-    font-style: italic;
-  }
-  
+.users-container {
+  padding: 24px;
+  font-family: sans-serif;
+}
 
+.users-container .table-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  background-color: transparent;
+  color: #253d2c;
+  border: none;
+}
+
+.users-container .filters {
+  display: flex;
+  width: 100%;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.users-container .filters select {
+  padding: 8px;
+  font-size: 14px;
+  color: #253d2c;
+}
+
+.users-container .table-wrapper {
+  overflow-x: auto;
+}
+
+.users-container .user-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.users-container .user-table th,
+.users-container .user-table td {
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.users-container .user-table thead {
+  background-color: #f4f4f4;
+}
+
+.users-container .user-table tr:hover {
+  background-color: #fafafa;
+}
+
+.users-container .reset-btn{
+  background-color: #6c757d;
+  color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.users-container .user-action-btns{
+  display: flex;
+  gap: 10px;
+}
+
+.users-container .user-action-btns button{
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  background-color: green;
+  outline: none;
+}

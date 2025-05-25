@@ -4,14 +4,15 @@ const Semester = require('../models/Semester');
 
 exports.createSemester = async(session, data)=>{
     try{
-        const pastSemester = await Semester.findOne({semNum:data.semNo, status:"completed"}).sort({createdAt:-1}).session(session);
+        const today = new Date();
+        const pastSemester = await Semester.findOne({semNum:data.semNum, endDate:{$lt:today}}).sort({createdAt:-1}).session(session);
         const newSem = new Semester({
-            name: `Sem ${data.semNo} ${data.startDate.getFullYear()}`,
-            semNum:data.semNo,
-            batch:data.batchId,
+            name: `Sem ${data.semNum} ${new Date(data.startDate).getFullYear()}`,
+            semNum:data.semNum,
+            batch:data.batch,
             startDate:data.startDate,
             endDate:data.endDate,
-            status:"upcoming"
+            // status:"upcoming"
         })
         await newSem.save({session});
         if(pastSemester){
@@ -51,7 +52,25 @@ exports.createSemester = async(session, data)=>{
         }
         return newSem;
     }catch(err){
-        console.log('Error in semester service');
+        console.log('Error in semester service',err);
+        throw new Error('Error in semester service');
+    }
+}
+
+exports.deleteSemester = async(semesterId, session)=>{
+    try{
+        const semester = await Semester.findById(semesterId).session(session);
+        if(!semester){
+            throw new Error('Semester not found');
+        }
+        const courses = await Course.find({semester:semester._id}).session(session);
+        for(const course of courses){
+            await deleteCourse(course._id, session);
+        }
+        await semester.deleteOne({ _id: semesterId }).session(session);
+        return semester;
+    }catch(err){
+        console.log('Error in semester service',err);
         throw new Error('Error in semester service');
     }
 }

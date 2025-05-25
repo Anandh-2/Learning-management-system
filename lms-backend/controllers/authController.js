@@ -16,7 +16,7 @@ const hashPassword = async (password) => {
 
 exports.register = async (req, res)=>{
     try{
-        const {userId, username, email, password, role, department, batch, isVerified=true}=req.body;
+        const {userId, username, rollNo, email, password, role, department, batch, isVerified=true}=req.body;
         const existingUser= await User.findOne({
             email: email,
         })
@@ -26,6 +26,7 @@ exports.register = async (req, res)=>{
         const user = new User({
             userId,
             username,
+            rollNo,
             email,
             password: await hashPassword(password),
             role,
@@ -34,13 +35,14 @@ exports.register = async (req, res)=>{
             isVerified
         })
         await user.save();
-        const token = jwt.sign(
-            { id: user.id, role: user.role, dept: user.department},
-            process.env.JWT_SECRET,
-            {expiresIn:'0.1h'}            
-        )
-        return res.status(201).json({message: 'Registration successful', token});
+        // const token = jwt.sign(
+        //     { id: user.id, role: user.role, dept: user.department},
+        //     process.env.JWT_SECRET,
+        //     {expiresIn:'0.1h'}            
+        // )
+        return res.status(201).json({message: 'Registration successful', user});
     } catch(err){
+        console.error("Error in registration:", err);
         return res.status(500).json({message: 'Server error',err});
     }
 };
@@ -48,7 +50,7 @@ exports.register = async (req, res)=>{
 exports.login= async (req, res)=>{
     try{
         const {email, password} = req.body;
-        const user = await User.findOne({email:email});
+        const user = await User.findOne({email:email, isVerified:true});
         if(!user){
             return res.status(404).json({message: 'User not found'});
         }
@@ -61,7 +63,7 @@ exports.login= async (req, res)=>{
             process.env.JWT_SECRET,
             {expiresIn:'1h'}
         )
-        return res.status(200).json({message: 'Login successful', token, role: user.role});
+        return res.status(200).json({message: 'Login successful', token, name:user.username, role: user.role});
     } catch(err){
         return res.status(500).json({message: 'Server error'});
     }
@@ -82,6 +84,16 @@ exports.approve=async(req,res)=>{
         const userId = req.params.userId;
         await User.findByIdAndUpdate(userId, {isVerified:true});
         return res.status(200).json({message:"Approved succesfully"});
+    }catch(err){
+        return res.status(500).json({message: 'Server error'});
+    }
+}
+
+exports.reject=async(req,res)=>{
+    try{
+        const userId = req.params.userId;
+        await User.findByIdAndDelete(userId);
+        return res.status(200).json({message:"Rejected succesfully"});
     }catch(err){
         return res.status(500).json({message: 'Server error'});
     }

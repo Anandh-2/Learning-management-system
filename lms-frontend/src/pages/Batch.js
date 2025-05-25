@@ -10,6 +10,10 @@ function Batch() {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const handleClick = (batchId)=>{
+    navigate(`${batchId}/departments`);
+  }
+
   useEffect(() => {
     const loadBatches = async()=>{
       setIsLoading(true);
@@ -23,19 +27,21 @@ function Batch() {
   return (
     <div className="batches">
       <div className="batch-header">
-        <button className="add-batch-btn" onClick={() => navigate('new')}>+ Add Batch</button>
+        <button className="add-batch-btn" onClick={() => navigate('new')}>Add Batch</button>
       </div>
+      <div className='batches-container'>
       {isLoading ? <div>Loading</div>
       :
       batches.length===0 ?
-      <div>No batch found</div>
+      <div style={{textAlign: 'center'}}>No batch found</div>
       :
-      <ul className="batch-list">
+      <div className="batches-grid">
         {batches.map((batch, index) => (
-          <li key={index} className="batch-item">{batch.name}</li>
+          <div key={index} className="batch-item" onClick={()=>handleClick(batch._id)}>{batch.name}</div>
         ))}
-      </ul>
+      </div>
       }
+      </div>
     </div>
   );
 }

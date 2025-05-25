@@ -1,0 +1,94 @@
+.instructor-courses{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.instructor-courses .add-course-btn{
+    margin-left: auto;
+    padding: 0.5rem 1rem;
+    background-color: #2E6F40;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.instructor-courses .courses-header{
+    display: flex;
+    align-items: center;
+    color: #8dbc9c;
+}
+
+.instructor-courses .courses-header .course-status-btn{
+    font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  background-color: transparent;
+  color: #253d2c;
+  border: none;
+}
+
+.instructor-courses .new-course-bg{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 900;
+}
+
+.instructor-courses .new-course-modal{
+    position: relative;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.instructor-courses .new-course-modal .new-course-form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.instructor-courses .new-course-modal .new-course-form .new-course-input,
+.instructor-courses .new-course-modal .new-course-form .new-course-select {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    font-size: large;
+    box-sizing: border-box;
+}
+
+.instructor-courses .new-course-modal .new-course-form .new-course-submit {
+    padding: 0.5rem 1rem;
+    background-color: #2E6F40;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.instructor-courses .new-course-modal .close-btn{
+    position: absolute;
+    top:0;
+    right:0;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: larger;
+}
