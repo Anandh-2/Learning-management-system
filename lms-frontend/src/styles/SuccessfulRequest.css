@@ -1,0 +1,24 @@
+.successful-request-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.successful-request {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: #e0ffe0;
+  border: 1px solid #4caf50;
+  color: #4caf50;
+  padding: 20px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.successful-request h2{
+    color: #253D2C;
+}

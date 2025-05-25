@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bcryptjs = require("bcryptjs");
 const dotenv = require("dotenv");
-dotenv.config();
+dotenv.config({path:'../.env'});
 
 const User = require("../models/User");
 
@@ -32,12 +32,11 @@ const createAdmin = async () => {
 
     if (!existingAdmin) {
       const admin = new User({
-        _id: process.env.ADMIN_ID,
         username: process.env.ADMIN_USERNAME,
         email: process.env.ADMIN_EMAIL,
         password: await hashPassword(process.env.ADMIN_PASSWORD),
         role: "admin",
-      });
+        isVerified: true,});
       await admin.save();
       console.log("Admin user created successfully.");
     } else {

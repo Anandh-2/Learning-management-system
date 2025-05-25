@@ -29,13 +29,15 @@ function Login() {
     }
     try{
       const response = await loginUser(userData);
+      console.log(response);
       if(response?.data.token){
-        localStorage.setItem("usertoken",response.data.token);
-        login(response.data.role);
-        navigate("/dashboard");
+        console.log("Token:", response.data.token);
+        login({name:response.data.name,role:response.data.role, token:response.data.token});
+        navigate(`/${response.data.role}`);
       }
       else{
         alert('Invalid credentials');
+        return;
       }
       setUserData(defaultData);
     } catch(err){

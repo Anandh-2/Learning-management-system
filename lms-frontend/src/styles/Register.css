@@ -24,6 +24,19 @@
     padding-bottom: 20px;
 }
 
+.register .register-fields{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.register .register-fields .left-fields, .register .register-fields .right-fields{
+    display: flex;
+    flex: 0.5;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .register .user-input{
     display: flex;
     flex-direction: column;
@@ -36,12 +49,17 @@
     gap: 20px;
 }
 
-.register input{
-    width: 300px;
+.register input, .register select{
+    width: 100%;
     padding: 20px;
     border-radius: 10px;
     border: 2px solid white;
     font-size: large;
+    /* appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none; */
+    box-sizing: border-box;
+    color: #253D2C;
 }
 
 .register label{
@@ -68,15 +86,19 @@
     align-self:center;
 }
 
-.register select{
+/* .register select{
     width: 100%;
     padding: 20px;
     border-radius: 10px;
     border: 2px solid white;
     font-size: large;
-}
+} */
 
 .register select:focus{
     outline: none;
     border-color: #2E6F40;
+}
+
+.register option{
+    color: #253D2C;
 }

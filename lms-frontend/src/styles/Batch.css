@@ -1,163 +1,32 @@
-.batches {
-  /* background-color: #F0F4F8; */
-  padding: 2rem;
-  box-sizing: border-box;
-  color: #2C3E50;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+.batches{
+  margin: 20px;
 }
 
-  .batches-title {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #34495E; 
-    font-size: 2rem;
-  }
-  
-  .batch-list {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Changed from auto-fit to 4 fixed columns */
-    gap: 3rem;
-    padding: 2rem;
-    margin: 2rem;
-    max-width: 100%; /* Optional: remove max-width limitation */
-  }
-  
-  
-  .batch-item {
-   
-    padding: 1.5rem 1.25rem;
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: #2C3E50;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-    position: relative;
-  }
-  
-  .batch-item:hover {
-    background: #5D6D7E;
-    color: #ffffff;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
-    transform: translateY(-3px);
-    cursor: pointer;
-  }
-  
-  html, body, #root {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  
-  
-  .batch-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 1000px;
-    margin-bottom: 1.5rem;
-  }
-  
-  .add-batch-btn {
-    color: #2C3E50;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .add-batch-btn:hover {
-    background-color: #34495E;
-  }
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-  }
-  
- 
-  .modal-content {
-    padding: 2rem;
-    border-radius: 8px;
-    width: 400px;
-    max-width: 100%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .modal-content h3 {
-    margin-bottom: 1rem;
-  }
-  
-  .modal-content form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .modal-content form div {
-    margin-bottom: 1rem;
-  }
-  
-  .modal-content input {
-    padding: 0.5rem;
-    margin-top: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .modal-content button {
-    margin-top: 1rem;
-    padding: 0.6rem;
-    /* background-color: #5D6D7E; */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .modal-content button:hover {
-   /* background-color: #34495E;  */
-  }
-  
-  .modal-content button[type="button"] {
-    background-color: #e74c3c;
-  }
-  
-  .modal-content button[type="button"]:hover {
-    background-color: #c0392b;
-  }
-  @media (max-width: 768px) {
-    .batch-list {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .batch-list {
-      grid-template-columns: 1fr;
-    }
-  }
-  /* Add this to your Batch.css file */
+.batches .batch-header{
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
 
-.loading {
-  font-size: 18px;
-  color: #555;
-  text-align: center;
-  margin-top: 20px;
+.batches .add-batch-btn{
+  background-color: #2E6F40;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.batches .batches-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.batches .batch-item{
+  background-color: #f5f8ff;
+  padding: 20px;
+  /* border-radius: 10px; */
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 2em;
 }

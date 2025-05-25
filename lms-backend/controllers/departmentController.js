@@ -1,3 +1,4 @@
+const BatchDepartment = require("../models/BatchDepartment");
 const Department = require("../models/Department");
 const User = require("../models/User");
 const { assignHod } = require("../services/departmentService");
@@ -24,9 +25,8 @@ exports.assignHOD = async (req, res) => {
   try {
     const {instructorId} = req.body;
     const departmentId = req.params.departmentId;
-    const batchId = req.params.batchId;
-    await assignHod(instructorId, batchId, departmentId);
-    return res.status(200).json({message:'New HOD assigned'});
+    const dept = await assignHod(instructorId, departmentId);
+    return res.status(200).json({message:'New HOD assigned', dept});
   } catch (err) {
     return res.status(500).json({ message: "Server error" });
   }
@@ -34,8 +34,28 @@ exports.assignHOD = async (req, res) => {
 
 exports.getDepartments = async(req,res)=>{
   try{
-    const departments = await Department.find();
+    const {batchId} = req.params;
+    const batchDepts = await BatchDepartment.find({batch:batchId}).populate('department');
+    return res.status(200).json({batchDepts});
+  }catch(err){
+    return res.status(500).json({ message: "Server error" });
+  }
+}
+
+exports.getAllDepartments = async(req,res)=>{
+  try{
+    const departments = await Department.find().populate('hod');
     return res.status(200).json({departments});
+  }catch(err){
+    return res.status(500).json({meaasge:'Server error'});
+  }
+}
+
+exports.deleteDepartment = async(req,res)=>{
+  try{
+    const {departmentId} = req.params;
+    const department = await Department.findByIdAndDelete(departmentId);
+    return res.status(200).json({message:'Department deleted successfully'});
   }catch(err){
     return res.status(500).json({ message: "Server error" });
   }

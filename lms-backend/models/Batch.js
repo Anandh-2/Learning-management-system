@@ -3,7 +3,9 @@ const mongoose = require('mongoose');
 const batchSchema = new mongoose.Schema({
     name:{type:String, required:true},
     // semesters:[{type:mongoose.Schema.Types.ObjectId, ref:"Semester"}],
-    isActive:{type:mongoose.Schema.Types.Boolean, default:true}
+    // isActive:{type:mongoose.Schema.Types.Boolean, default:true},
+    startDate:{type:Date},
+    endDate:{type:Date}
 },
 {timestamps:true})
 

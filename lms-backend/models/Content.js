@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const contentSchema = new mongoose.Schema({
     title:{type:String, required:true},
     type:{type:String, enum:["video"], required:true},
-    data:{type:mongoose.Schema.Types.Mixed, required:true},
+    data:{type:mongoose.Schema.Types.Mixed, default:null},
     // module:{type:mongoose.Schema.Types.ObjectId, ref:"Module", required:true}
 },{timestamps:true});
 

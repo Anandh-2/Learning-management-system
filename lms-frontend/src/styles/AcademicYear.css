@@ -1,32 +1,31 @@
 .academic-container {
-  max-width: 1000px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   padding: 20px;
 }
 
-.header {
+.academic-container select {
+  padding: 8px;
+  font-size: 16px;
+  min-width: 150px;
+}
+
+.academic-container .add-button {
+  background-color: #2e6f40;
+  color: white;
+  margin: 10px 0px 10px 0px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.academic-container .academic-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-}
-
-.add-button {
-  padding: 8px 16px;
-  background-color: #007bff;
-  border: none;
-  color: white;
-  font-weight: bold;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.add-button:hover {
-  background-color: #0056b3;
-}
-
-.filter-section {
-  margin-bottom: 20px;
 }
 
 .academic-table {
@@ -43,4 +42,26 @@
 
 .academic-table th {
   background-color: #f8f8f8;
+}
+
+.academic-container .edit-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  font-size: larger;
+}
+
+.academic-container .edit-button:disabled {
+  cursor: not-allowed;
+}
+
+.academic-container .delete-button{
+  background-color: red;
+  align-self: flex-end;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  color: white;
 }

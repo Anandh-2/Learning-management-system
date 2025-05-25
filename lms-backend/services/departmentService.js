@@ -1,23 +1,23 @@
-const BatchDepartment = require("../models/BatchDepartment");
+const Department = require("../models/Department");
 const User = require("../models/User");
 
-exports.assignHod = async (instructorId, batchId, departmentId) => {
+exports.assignHod = async (instructorId, departmentId) => {
   try {
-    const batchDept = await BatchDepartment.findOne({batch:batchId ,department:departmentId});
-    if(!batchDept) throw new Error('BatchDepartment not found');
-    if(!batchDept.hod){
-      const prevHod = await User.findById(batchDept.hod);
+    const dept = await Department.findById(departmentId);
+    if(!dept) throw new Error('Department not found');
+    if(dept.hod){
+      const prevHod = await User.findById(dept.hod);
       prevHod.role='instructor';
       await prevHod.save();
     }
     const newHod = await User.findById(instructorId);
     newHod.role='hod'; 
     await newHod.save();
-    batchDept.hod=newHod._id;
-    await batchDept.save();
-    
+    dept.hod=newHod._id;
+    await dept.save();
+    return dept;
   }catch(err){
-    console.log('Error in department service');
+    console.log('Error in department service',err);
     throw err;
   }
 }   

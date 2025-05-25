@@ -1,12 +1,22 @@
+:root{
+    --sidebar-width:300px;
+}
+
 .content-bar{
-    min-height: 100vh;
-    flex: 0.2;
+    height: 100%;
+    width: var(--sidebar-width);
+    /* flex: 0.2; */
     padding-left: 20px;
     padding-right: 20px;
     background-color: #253D2C;
     color: white;
-    /*box-shadow: 5px 0 5px 0px #CFFFDC;*/
-    /*border-right: 5px solid #CFFFDC;*/
+    margin-left: calc(-1 * var(--sidebar-width));
+    box-sizing: border-box;
+    transition: margin-left 0.3s ease;
+}
+
+.content-bar.open{
+    margin-left: 0;
 }
 
 .content-bar .bar-top{
@@ -34,11 +44,27 @@
     }
 }
 
+.bar-top-btns.fixed{
+    position: fixed;
+    top:10px;
+    left:10px;
+    background-color: #253D2C;
+    &:hover{
+        background-color: #355f42;
+        cursor: pointer;
+    }
+}
+
 .content-bar .module{
     padding-top: 10px;
     padding-bottom: 10px;
     border-top: 1px solid #CFFFDC;
     font-size: larger;
+}
+
+.content-bar .course-title{
+    text-align: center;
+    padding: 0px 10px 10px 10px;
 }
 
 .module{
@@ -147,8 +173,10 @@
 
 .module-modal form{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 10px;
 }
 
 .module-modal #module-action-btns{

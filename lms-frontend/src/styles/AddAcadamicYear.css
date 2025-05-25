@@ -7,71 +7,82 @@
   font-family: Arial, sans-serif;
 }
 
-h2 {
+.add-academic-container h2 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-.year-select {
+.add-academic-container .year-select {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.year-select label {
+.add-academic-container .year-select label {
   margin-right: 10px;
   font-weight: bold;
 }
 
-.year-select select {
+.add-academic-container input[type="text"]{
+  padding: 8px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-academic-container .year-select select {
   padding: 8px;
   font-size: 16px;
   min-width: 150px;
 }
 
-.input-table {
+.add-academic-container .input-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
   table-layout: fixed;
 }
 
-.input-table th,
-.input-table td {
+.add-academic-container .input-table th,
+.add-academic-container .input-table td {
   border: 1px solid #ccc;
   padding: 10px;
   text-align: center;
 }
 
-.input-table th {
+.add-academic-container .input-table th {
   background-color: #eaeaea;
 }
 
-.input-table input,
-.input-table select {
+.add-academic-container .input-table input,
+.add-academic-container .input-table select {
   width: 100%;
   padding: 8px;
   font-size: 15px;
   box-sizing: border-box;
 }
 
-.button-group {
+.add-academic-container .button-group {
   display: flex;
   justify-content: flex-start;
   gap: 12px;
 }
 
-.button-group {
-  padding: 10px 16px;
-  background-color: #007bff;
+.add-academic-container .button-group {
+  /* padding: 10px 16px;
+  background-color: #28a745;
   color: white;
   border: none;
   border-radius: 6px;
-  cursor: pointer;
-  font-size: 15px;
-  transition: background-color 0.2s;
+  font-size: 15px; */
+  justify-content: space-between;
 }
 
-.button-group:hover {
-  background-color: #0056b3;
+.add-academic-container .aca-btn{
+  background-color: #28a745;
+  color: white;
+  padding:10px;
+  font-size: 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }

@@ -11,7 +11,7 @@ const batchDepartmentSchema = new mongoose.Schema({
   department: { type: mongoose.Schema.Types.ObjectId, ref: 'Department', required: true },
 //   hodAssignments: [hodAssignmentSchema],
 //   isOffered: { type: Boolean, default: true }
-  hod: {type:mongoose.Schema.Types.ObjectId, ref:'User'}
+  // hod: {type:mongoose.Schema.Types.ObjectId, ref:'User'}
 });
 
 module.exports = mongoose.model('BatchDepartment', batchDepartmentSchema);

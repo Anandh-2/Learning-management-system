@@ -1,109 +1,79 @@
-.new-batch-container {
-    padding: 20px;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 600px;
-  }
-  
-  input[type="text"] {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .departments-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 15px;
-  }
-  
-  .departments-table th,
-  .departments-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  .departments-table th {
-    background-color: #f4f4f4;
-  }
-  
-  .add-department-row td {
-    text-align: center;
-    font-weight: bold;
-    cursor: pointer;
-    color: #007bff;
-  }
-  
-  .button {
-    padding: 10px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
-  }
-  
-  /* Modal Styles */
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* semi-transparent */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-  
-  .modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 300px;
-  }
-  
-  .modal-content input {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  
-  .modal-actions {
-    display: flex;
-    justify-content: space-between;
-  }
-  /* Add this to your NewBatchCreation.css file */
+.new-batch{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+}
 
-/* Loading Spinner */
-.loading-spinner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .spinner {
-    border: 4px solid #f3f3f3; /* Light grey */
-    border-top: 4px solid #3498db; /* Blue */
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    animation: spin 2s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
-  /* Style for the "Creating..." text */
-  .loading-spinner p {
-    margin-left: 10px;
-    font-size: 14px;
-    color: #555;
-  }
-  
+.new-batch-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90%;
+  width: 90%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.new-batch-container .new-batch-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.new-batch-container .form-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.new-batch-container h3{
+  margin-bottom: 0;
+}
+
+.new-batch-container label {
+  font-weight: bold;
+}
+
+.new-batch-container input[type="text"] {
+  padding: 8px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+.new-batch-container .departments-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 15px;
+}
+
+.new-batch-container .departments-table th,
+.new-batch-container .departments-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.new-batch-container .departments-table th {
+  background-color: #f4f4f4;
+}
+
+.new-batch-container .add-department-row td {
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  color: #007bff;
+}
+
+.new-batch-container .button {
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+

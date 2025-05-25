@@ -1,91 +1,83 @@
-
-  
-  .departments {
-    font-family: Arial, sans-serif;
-    padding: 5rem;
-    color: #2E6F40;
+.departments{
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  
-  .container {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  
-  .list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    max-width: 900px;
-    width: 100%;
-    padding: 0;
-    list-style: none;
-  }
-  
-  .item {
-    display: flex;
-    align-items: center;
     justify-content: center;
-    background-color: #CFFFDC;
-    padding: 1.5rem;
-    height: 40px;
-    border-left: 6px solid #68BA7F;
-    border-radius: 10px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .item:hover {
-    background-color: #68BA7F;
+    gap: 10px;
+    margin: 20px;
+}
+
+.departments table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.departments tbody{
+  position: relative;
+}
+
+.departments th,
+.departments td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    /* position: relative; */
+}
+
+.departments th {
+    background-color: #f4f4f4;
+    text-align: left;
+}
+
+.departments tr:hover{
+    background-color: #fafafa;
+}
+
+.departments .add-department {
+    background-color: #2E6F40;
     color: white;
+    margin: 10px 0px 10px 0px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-  }
-  
-  .add-card {
-    text-align: center;
-    font-weight: bold;
-    background-color: #e0fbe0;
-    border: 2px dashed #68BA7F;
-  }
-  
-  
-  .modal {
+    align-self: flex-end;
+}
+
+.departments .modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(37, 61, 44, 0.6);
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
-    backdrop-filter: blur(10px); 
-  }
-  
-  .modal-content {
+}
+
+.departments .modal-content {
     background: #fff;
     padding: 2rem;
     border-radius: 10px;
     width: 90%;
     max-width: 400px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-  
-  .modal-content input {
+}
+
+.departments .modal-content input {
     display: block;
     width: 100%;
-    margin-bottom: 1rem;
+    margin: 10px 0 10px 0;
     padding: 0.5rem;
-  }
-  
-  .modal-buttons {
+    box-sizing: border-box;
+}
+
+  .departments .modal-buttons {
     display: flex;
     justify-content: space-between;
   }
   
-  .modal-buttons button {
+  .departments .modal-buttons button {
     padding: 0.5rem 1rem;
     background-color: #2E6F40;
     color: white;
@@ -94,3 +86,34 @@
     cursor: pointer;
   }
   
+  .departments .action-btns{
+    display: flex;
+    gap: 10px;
+  }
+
+  .departments .action-btns button{
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .departments .instructors-list{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    color: #2E6F40;
+    border: 1px solid black;
+    min-height: 300px;
+    width: 200px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+  }
+
+  .departments .instructors-list .instructor-item{
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+  }
