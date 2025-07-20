@@ -6,6 +6,7 @@ import { LuShuffle } from "react-icons/lu";
 import { CgFolderAdd } from "react-icons/cg";
 import { SlOptionsVertical } from "react-icons/sl";
 import { FaRegCheckCircle } from "react-icons/fa";
+import { FiUsers } from "react-icons/fi";
 import {DragDropContext, Droppable, Draggable} from '@hello-pangea/dnd'
 import { useNavigate } from 'react-router-dom';
 import { createContent, createModule, deleteModule, reorderCourse } from '../api/Api';
@@ -136,6 +137,7 @@ function ContentsBar({course, setCourse}) {
     <div className='bar-top'>
       <IoMdArrowRoundBack className='bar-top-btns' onClick={()=>navigate(-1)}/>
       <div className='bar-top-right'>
+      <FiUsers className='bar-top-btns' onClick={()=>navigate(`students`)}/>
       <CgFolderAdd className='bar-top-btns' onClick={()=>setIsModuleModalOpen(prev=>!prev)}/>
       {isShuffleOn?<FaRegCheckCircle style={{backgroundColor:'#355f42'}} className='bar-top-btns' onClick={handleShuffleSaveClk}/>:<LuShuffle className='bar-top-btns' onClick={handleShuffleClk}/>}
       <LuPanelLeftClose onClick={()=>setIsSidebarOpen(prev=>!prev)} className={`bar-top-btns ${isSidebarOpen?'':'fixed'}`}/>

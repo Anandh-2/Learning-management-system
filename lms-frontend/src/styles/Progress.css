@@ -1,0 +1,19 @@
+.progress-out{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    width: 80px;
+    border: 2px solid #253D2C;
+    border-radius: 100%;
+}
+
+.progress-out .progress-in{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80%;
+    width: 80%;
+    border: 2px solid #253D2C;
+    border-radius: 100%;
+}

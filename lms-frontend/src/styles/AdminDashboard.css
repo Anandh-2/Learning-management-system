@@ -1,17 +1,10 @@
-.student-dashboard{
-    /* height: calc(100% - 70px); */
-    /* overflow-y: scroll; */
-    /* scroll-behavior: smooth; */
-    /* scrollbar-width: none; */
-}
-
-.student-dashboard .cards-container{
+.admin-dashboard .cards-container{
     display: flex;
     gap: 20px;
     padding: 10px 20px 10px 20px;
 }
 
-.student-dashboard .card{
+.admin-dashboard .card{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -24,36 +17,36 @@
     box-shadow: 2px 2px 2px 2px #ccc;
 }
 
-.student-dashboard .card .card-title{
+.admin-dashboard .card .card-title{
     font-size: 1.2em;
     font-weight: 700;
 }
 
-.student-dashboard .card .card-data{
+.admin-dashboard .card .card-data{
     font-size: 2em;
     font-weight: 700;
 }
 
-.student-dashboard .course-row-list{
+.admin-dashboard .course-row-list{
     margin: 20px;
     border: 3px solid #f5f8ff;
     border-radius: 10px;
 }
 
-.student-dashboard .course-row-head{
+.admin-dashboard .course-row-head{
     display: flex;
     justify-content: space-between;
     padding: 20px;
     border-bottom: 3px solid #f5f8ff;
 }
 
-.student-dashboard .more-btn{
+.admin-dashboard .more-btn{
     background-color: transparent;
     border: none;
     font-size: 1.2em;
 }
 
-.student-dashboard .course-row{
+.admin-dashboard .course-row{
     display: flex;
     padding: 30px 20px;
     gap: 30px;

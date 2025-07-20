@@ -1,8 +1,11 @@
 .layout{
     height: 100vh;
     display: flex;
+    overflow: hidden;
 }
 
 .layout .main-container{
     flex: 1;
+    overflow: auto;
+    /* scrollbar-width: none; */
 }

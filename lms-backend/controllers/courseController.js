@@ -5,6 +5,7 @@ const Module = require('../models/Module.js');
 const Content = require('../models/Content.js')
 const Enrollment = require('../models/Enrollment.js');
 const { default: mongoose } = require('mongoose');
+const { syncCourses, syncStudents } = require('../services/enrollmentService.js');
 
 exports.getCourseById = async(req, res)=>{
     try{
@@ -69,8 +70,19 @@ exports.deleteCourse=async(req,res)=>{
 
 exports.getEnrolledCourses = async(req,res)=>{
     try{
-        const courses = await Enrollment.find({student:req.user.id}).populate("course");
-        return res.status(200).json({courses});
+        const {status} = req.query;
+        const courses = await Enrollment.find({student:req.user.id}).populate({
+            path:'course',
+            populate:'semester'
+        });
+        const activeCourses = courses.filter((enrollment)=>enrollment.course.semester.endDate>=new Date());
+        const pastCourses = courses.filter((enrollment)=>enrollment.course.semester.endDate<new Date());
+        if(status === "live"){
+            return res.status(200).json({courses:activeCourses.map(enrollment=>enrollment.course)});
+        }else if(status === "past"){
+            return res.status(200).json({courses:pastCourses.map(enrollment=>enrollment.course)});
+        }
+        return res.status(200).json({ courses: enrollments.map(e => e.course) });
     }catch(err){
         return res.status(500).json({message:'Server error'});
     }
@@ -95,6 +107,18 @@ exports.getCreatedCourses = async(req,res)=>{
     }
 }
 
+exports.getEnrolledStudents = async(req, res)=>{
+    try{
+        const {courseId} = req.params;
+        console.log(courseId);
+        const enrollments = await Enrollment.find({course:courseId}).populate('student');
+        return res.status(200).json({enrollments});
+    }catch(err){
+        console.log(err);
+        return res.status(500).json({message:'Server error'});
+    }
+}
+
 exports.reorderCourse = async(req, res)=>{
     try{
         const {courseId} = req.params;
@@ -112,6 +136,27 @@ exports.reorderCourse = async(req, res)=>{
         course.modules = reorderedCourse.modules.map(module=>module._id);
         await course.save();
         return res.status(200).json({message:'Reordering successful'});
+    }catch(err){
+        console.log(err);
+        return res.status(500).json({message:'Server error'});
+    }
+}
+
+exports.syncCourses = async(req, res)=>{
+    try{
+        await syncCourses(req.user.id);
+        return res.status(200).json({message:'Synced successfully'});
+    }catch(err){
+        console.log(err);
+        return res.status(500).json({message:'Server error'});
+    }
+}
+
+exports.syncStudents = async(req, res)=>{
+    try{
+        const {courseId} = req.params;
+        await syncStudents(courseId);
+        return res.status(200).json({message:'Synced successfully'});
     }catch(err){
         console.log(err);
         return res.status(500).json({message:'Server error'});
