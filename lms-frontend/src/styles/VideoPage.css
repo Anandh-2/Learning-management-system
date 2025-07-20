@@ -6,13 +6,14 @@
   overflow-y: scroll;
   padding-bottom: 50px;
   box-sizing: border-box;
+  padding: 20px;
 }
 
 .video-page #title{
   font-size: 1.5em;
   font-weight: 700;
-  margin: 20px;
-  padding: 10px;
+  /* margin: 20px; */
+  /* padding: 10px; */
   min-width: 200px;
   text-align: center;
 }
@@ -31,4 +32,11 @@
 
 .video-page .editable-div:focus{
   border: 2px solid #253D2C;
+}
+
+.video-page .no-content{
+  display: flex;
+  height: 60vh;
+  justify-content: center;
+  align-items: center;
 }

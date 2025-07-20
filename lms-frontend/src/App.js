@@ -24,6 +24,7 @@ import AdminCourses from "./pages/AdminCourses";
 import SuccessfulRequest from "./pages/SuccessfulRequest";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Unauthorized from "./pages/Unauthorized";
+import StudentPanel from "./pages/StudentPanel";
 
 function App() {
   const { user } = useAuth();
@@ -69,6 +70,7 @@ function App() {
         <Route path="/course/:courseId" element={<ProtectedRoute allowedRoles={["student","instructor","hod","admin"]}><CourseLayout /></ProtectedRoute>}>
           <Route index element={<div>Nothing open</div>} />
           <Route path="module/:moduleId/video/:contentId" element={<VideoPage />} />
+          <Route path="students" element={<StudentPanel/>}/>
         </Route>
       </Routes>
     </div>

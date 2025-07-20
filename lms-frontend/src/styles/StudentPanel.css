@@ -1,0 +1,41 @@
+.studentpanel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+}
+
+/* .studentpanel .heading {
+} */
+
+.studentpanel .sync-btn {
+  background-color: #2e6f40;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.studentpanel .stu-tbl{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.studentpanel .stu-tbl th{
+    background-color: #f4f4f4;
+}
+
+.studentpanel .stu-tbl tr:hover{
+    background-color: #fafafa;
+}
+
+.studentpanel .stu-tbl td,
+.studentpanel .stu-tbl th{
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}

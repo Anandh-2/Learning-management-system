@@ -97,9 +97,9 @@ export const deleteUser = async (userId) => {
   }
 };
 
-export const getEnrolledCourses = async () => {
+export const getEnrolledCourses = async (status) => {
   try {
-    const response = await api.get("/courses/enrolled-courses");
+    const response = await api.get(`/courses/enrolled-courses?status=${status}`);
     return response.data.courses;
   } catch (err) {
     console.log("Error in course api");
@@ -116,6 +116,34 @@ export const getCreatedCourses = async (status) => {
     return [];
   }
 };
+
+export const getEnrolledStudents = async(courseId)=>{
+  try{
+    const response = await api.get(`/courses/${courseId}/students`);
+    return response.data.enrollments;
+  }catch(err){
+    console.log("Error in course api");
+    return [];
+  }
+}
+
+export const syncCourses = async()=>{
+  try{
+    const response = await api.post('courses/sync-courses');
+    return response.data;
+  }catch(err){
+    console.log("Error in course api");
+  }
+} 
+
+export const syncStudents = async(courseId)=>{
+  try{
+    const response = await api.post(`courses/${courseId}/sync-students`);
+    return response.data;
+  }catch(err){
+    console.log("Error in course api");
+  }
+}
 
 export const getCourseById = async(courseId)=>{
   try{
