@@ -1,4 +1,5 @@
 const Course = require('../models/Course');
+const Enrollment = require('../models/Enrollment');
 const { deleteModule } = require('./moduleService');
 
 exports.deleteCourse = async (courseId, session) => {
@@ -11,9 +12,10 @@ exports.deleteCourse = async (courseId, session) => {
             await deleteModule(module._id, session);
         }
         await Course.deleteOne({ _id: courseId }).session(session);
+        await Enrollment.deleteMany({course:course._id}).session(session);
         return course;
     }catch(err){
         console.log('Error in course service',err);
         throw new Error('Error in course service');
     }
-}   
+}

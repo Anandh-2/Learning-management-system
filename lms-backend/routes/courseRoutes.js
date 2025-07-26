@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {auth, isInstructor, roleMiddleware}=require('../middlewares/Auth');
-const { createCourse, getEnrolledCourses, getCreatedCourses, getCourseById, reorderCourse, deleteCourse, syncCourses, getEnrolledStudents, syncStudents } = require('../controllers/courseController');
+const { createCourse, getEnrolledCourses, getCreatedCourses, getCourseById, reorderCourse, deleteCourse, syncCourses, getEnrolledStudents, syncStudents, getAllCourses, getNewCourses, getEnrolledCoursesCount, getCreatedCoursesCount } = require('../controllers/courseController');
 const {getModules, createModule, deleteModule} = require('../controllers/moduleController');
 const { createContent, getContentById, saveVideoContent, deleteContent } = require('../controllers/contentController');
 
@@ -9,6 +9,8 @@ const multer = require('multer');
 const upload = multer({dest:'uploads/'});
 
 router.post("/courses",auth,roleMiddleware("instructor","hod"),createCourse);
+router.get("/courses", auth, getAllCourses);
+router.get("/courses/new", auth, getNewCourses);
 //router.post();
 router.post("/courses/:courseId/modules",auth,roleMiddleware("instructor","hod"),createModule);
 router.post("/modules/:moduleId/contents", auth, roleMiddleware("instructor","admin"),createContent);
@@ -27,4 +29,6 @@ router.patch('/courses/:courseId/reorder',auth,reorderCourse);
 router.post('/courses/sync-courses', auth, syncCourses);
 router.post('/courses/:courseId/sync-students', auth, syncStudents);
 
+router.get('/courses/enrolled-courses/count', auth, getEnrolledCoursesCount);
+router.get('/courses/created-courses/count', auth, getCreatedCoursesCount);
 module.exports=router;

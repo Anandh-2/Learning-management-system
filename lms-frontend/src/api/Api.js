@@ -410,3 +410,85 @@ export const getActiveSemesters = async () => {
     return [];
   }
 }
+
+export const getAllCourses = async () => {
+  try {
+    const response = await api.get("/courses");
+    return response.data.courses;
+  } catch (err) {
+    console.log("Error in course api");
+    return [];
+  }
+}
+
+export const getNewCourses = async () => {
+  try {
+    const response = await api.get("/courses/new");
+    return response.data.courses;
+  } catch (err) {
+    console.log("Error in course api");
+    console.error(err);
+    return [];
+  }
+}
+
+export const getBatchCount = async () => {
+  try {
+    const response = await api.get("/batches/count");
+    return response.data.count;
+  } catch (err) {
+    console.log("Error in batch count api");
+    return '-1';
+  }
+};
+
+export const getDepartmentCount = async () => {
+  try {
+    const response = await api.get("/departments/count");
+    return response.data.count;
+  } catch (err) {
+    console.log("Error in department count api");
+    return '-1';
+  }
+};
+
+export const getEnrolledCoursesCount = async () => {
+  try {
+    const response = await api.get("/courses/enrolled-courses/count");
+    return response.data.count;
+  } catch (err) {
+    console.log("Error in enrolled courses count api");
+    return '-1';
+  }
+}
+
+export const getCompletedCoursesCount = async () => {
+  try {
+    const response = await api.get("/courses/enrolled-courses/count?status=completed");
+    return response.data.count;
+  } catch (err) {
+    console.log("Error in completed courses count api");
+    return '-1';
+  }
+};
+
+export const getCreatedCoursesCount = async () => {
+  try {
+    const response = await api.get("/courses/created-courses/count");
+    return response.data.count;
+  } catch (err) {
+    console.log("Error in created courses count api");
+    return '-1';
+  }
+};
+
+export const getStudentsCountByInstructor = async () => {
+  try {
+    const response = await api.get("/users/students-count");
+    return response.data.count;
+  } catch (err) {
+    console.log("Error in students count by instructor api");
+    console.error(err);
+    return '-1';
+  }
+};

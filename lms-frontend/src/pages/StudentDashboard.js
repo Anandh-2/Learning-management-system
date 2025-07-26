@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaArrowRightLong } from 'react-icons/fa6';
 import Course from '../components/Course';
 import '../styles/StudentDashboard.css';
+import { getCompletedCoursesCount, getEnrolledCoursesCount, getNewCourses } from '../api/Api';
 
 const dummyCourses = [
   {
@@ -27,10 +28,29 @@ const dummyCourses = [
 ]
 
 function StudentDashboard() {
-  const [newCourses, setNewCourses] = useState(dummyCourses);
-  const [academicYear, setAcademicYear] = useState('2024-2025');
+  const [newCourses, setNewCourses] = useState([]);
+  const [academicYear, setAcademicYear] = useState('2025-2026');
   const [courseCount, setCourseCount] = useState(10);
-  const [currentSemester, setCurrentSemester] = useState(7);
+  const [completedCoursesCount, setCompletedCoursesCount] = useState(7);
+
+  useEffect(()=>{
+    const fetchCoursesCount = async () => {
+      const data = await getEnrolledCoursesCount();
+      setCourseCount(data);
+    }
+    fetchCoursesCount();
+    const fetchCompletedCoursesCount = async () => {
+      const data = await getCompletedCoursesCount(); 
+      setCompletedCoursesCount(data);
+    }
+    fetchCompletedCoursesCount();
+    const fetchCourses = async () => {
+      const data = await getNewCourses();
+      console.log(data);
+      setNewCourses(data);
+    }
+    fetchCourses();
+  },[]);
 
   return (
     <div className="student-dashboard">
@@ -40,8 +60,8 @@ function StudentDashboard() {
           <div className='card-data'>{courseCount}</div>
         </div>
         <div className='card'>
-          <div className='card-title'>Current Semester</div>
-          <div className='card-data'>{currentSemester}</div>
+          <div className='card-title'>No. of Courses Completed</div>
+          <div className='card-data'>{completedCoursesCount}</div>
         </div>
         <div className='card'>
           <div className='card-title'>Current Academic Year</div>
@@ -49,9 +69,9 @@ function StudentDashboard() {
         </div>
       </div>
 
-      <div className='course-row-list'>
+      {/* <div className='course-row-list'>
       <div className='course-row-head'>
-      <h2>Newly Added Courses</h2>
+      <h2>Recently Viewed Courses</h2>
       <button className='more-btn'><FaArrowRightLong/></button>
       </div>
       <div className='course-row'>
@@ -59,7 +79,7 @@ function StudentDashboard() {
           <Course key={course.id} id={course.id} title={course.title} instructor={course.instructor}/>
         ))}
       </div>
-      </div>
+      </div> */}
 
       <div className='course-row-list'>
       <div className='course-row-head'>
@@ -68,7 +88,7 @@ function StudentDashboard() {
       </div>
       <div className='course-row'>
         {newCourses.map((course)=>(
-          <Course key={course.id} id={course.id} title={course.title} instructor={course.instructor}/>
+          <Course key={course.id} id={course.id} title={course.title} instructor={course.instructor.username}/>
         ))}
       </div>
       </div>

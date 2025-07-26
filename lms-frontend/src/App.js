@@ -68,7 +68,7 @@ function App() {
         </Route>
 
         <Route path="/course/:courseId" element={<ProtectedRoute allowedRoles={["student","instructor","hod","admin"]}><CourseLayout /></ProtectedRoute>}>
-          <Route index element={<div>Nothing open</div>} />
+          <Route index element={<div className="nothing">Nothing open</div>} />
           <Route path="module/:moduleId/video/:contentId" element={<VideoPage />} />
           <Route path="students" element={<StudentPanel/>}/>
         </Route>

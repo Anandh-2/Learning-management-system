@@ -2,8 +2,10 @@ import React, {useState} from "react";
 import ProfileDropDown from "./ProfileDropdown";
 import '../styles/Header.css';
 import { useLocation } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function NavBar() {
+  const {user} = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
   const location = useLocation();
@@ -36,7 +38,7 @@ function NavBar() {
             onClick={toggleDropdown}
             onBlur={closeDropdown}
           >
-            P
+            {user.name.charAt(0).toUpperCase()}
           </button>
           {isOpen && <ProfileDropDown />}
         </div>
