@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { use, useContext, useEffect, useState } from "react";
 import "../styles/VideoPage.css";
 import OptionsButton from "../components/OptionsButton";
 import {
@@ -8,6 +8,7 @@ import {
   useParams,
 } from "react-router-dom";
 import { deleteContent, getContentById, saveVideoContent } from "../api/Api";
+import { useAuth } from "../context/AuthContext";
 
 function VideoPage() {
   // const demoContents = [
@@ -32,6 +33,8 @@ function VideoPage() {
   //     data: 'U1JLtpJTe84'
   //   }
   // ];
+
+  const {user} = useAuth();
   const [content, setContent] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -146,15 +149,15 @@ function VideoPage() {
           className="video"
         ></iframe>
       ) : (
-        <div>No video content found!</div>
+        <div className="no-content">No video content found!</div>
       )}
-      <OptionsButton
+      {user.role!=='student'&& <OptionsButton
         isEditing={isEditing}
         setIsEditing={setIsEditing}
         handleSave={handleSave}
         handleCancel={handleCancel}
         handleDelete={handleContentDelete}
-      />
+      />}
     </div>
   );
 }

@@ -57,6 +57,7 @@ exports.deleteCourse=async(req,res)=>{
         await Course.findByIdAndDelete(courseId).session(session);
         await Module.deleteMany({_id:{$in:modules}}).session(session);
         await Content.deleteMany({_id:{$in:contents}}).session(session);
+        await Enrollment.deleteMany({course:course._id}).session(session);
         await session.commitTransaction();
         session.endSession();
         return res.status(200).json('Course deleted successfully');
@@ -73,8 +74,9 @@ exports.getEnrolledCourses = async(req,res)=>{
         const {status} = req.query;
         const courses = await Enrollment.find({student:req.user.id}).populate({
             path:'course',
-            populate:'semester'
+            populate:['semester','instructor']
         });
+        console.log(courses);
         const activeCourses = courses.filter((enrollment)=>enrollment.course.semester.endDate>=new Date());
         const pastCourses = courses.filter((enrollment)=>enrollment.course.semester.endDate<new Date());
         if(status === "live"){
@@ -84,6 +86,7 @@ exports.getEnrolledCourses = async(req,res)=>{
         }
         return res.status(200).json({ courses: enrollments.map(e => e.course) });
     }catch(err){
+        console.log(err);
         return res.status(500).json({message:'Server error'});
     }
 };
@@ -157,6 +160,64 @@ exports.syncStudents = async(req, res)=>{
         const {courseId} = req.params;
         await syncStudents(courseId);
         return res.status(200).json({message:'Synced successfully'});
+    }catch(err){
+        console.log(err);
+        return res.status(500).json({message:'Server error'});
+    }
+}
+
+exports.getAllCourses = async(req, res)=>{
+    try{
+        const courses = await Course.find().populate('instructor').populate('semester');
+        return res.status(200).json({courses});
+    }catch(err){
+        console.log(err);
+        return res.status(500).json({message:'Server error'});
+    }
+}
+
+exports.getNewCourses = async(req, res)=>{
+    try{
+        if(req.user.role==='student'){
+        const courses = await Enrollment.find({student:req.user.id}).sort({createdAt:-1}).limit(4).populate({
+            path:'course',
+            populate:['semester','instructor']
+        });
+        return res.status(200).json({courses:courses.map(enrollment=>enrollment.course)});
+        }else if(req.user.role==='instructor'){
+            const courses = await Course.find({instructor:req.user.id}).sort({createdAt:-1}).limit(4).populate('semester').populate('instructor');
+            return res.status(200).json({courses});
+        }else if(req.user.role==='hod'){
+            const courses = await Course.find({department:req.user.department}).sort({createdAt:-1}).limit(6).populate('semester').populate('instructor');
+            return res.status(200).json({courses});
+        }
+        const courses = await Course.find().sort({createdAt:-1}).limit(6).populate('semester').populate('instructor');
+        return res.status(200).json({courses});
+    }catch(err){
+        console.log(err);
+        return res.status(500).json({message:'Server error'});
+    }
+}
+
+exports.getEnrolledCoursesCount = async(req, res)=>{
+    try{
+        const {status} = req.query;
+        if(status){
+            const count = await Enrollment.countDocuments({student:req.user.id,progress:100});
+            return res.status(200).json({count});
+        }
+        const count = await Enrollment.countDocuments({student:req.user.id});
+        return res.status(200).json({count});
+    }catch(err){
+        console.log(err);
+        return res.status(500).json({message:'Server error'});
+    }
+}
+
+exports.getCreatedCoursesCount = async(req, res)=>{
+    try{
+        const count = await Course.countDocuments({instructor:req.user.id});
+        return res.status(200).json({count});
     }catch(err){
         console.log(err);
         return res.status(500).json({message:'Server error'});

@@ -60,3 +60,12 @@ exports.deleteDepartment = async(req,res)=>{
     return res.status(500).json({ message: "Server error" });
   }
 }
+
+exports.getDepartmentCount = async(req,res)=>{
+  try{
+    const count = await Department.countDocuments();
+    return res.status(200).json({count});
+  }catch(err){
+    return res.status(500).json({ message: "Server error" });
+  }
+}

@@ -60,3 +60,12 @@ exports.getActiveBatches = async(req,res)=>{
         return res.status(500).json({ message: "Server error" });
     }
 }
+
+exports.getBatchCount = async(req,res)=>{
+    try{
+        const count = await Batch.countDocuments();
+        return res.status(200).json({count});
+    }catch(err){
+        return res.status(500).json({ message: "Server error" });
+    }
+}

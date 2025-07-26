@@ -1,3 +1,4 @@
+const Enrollment = require('../models/Enrollment');
 const User = require('../models/User');
 const {register} = require('./authController');
 
@@ -53,6 +54,17 @@ exports.deleteUser = async(req, res)=>{
         const userId = req.params.userId;
         await User.findByIdAndDelete(userId);
         return res.status(200).json({message: 'User deleted successfully'});
+    }catch(err){
+        console.log(err);
+        return res.status(500).json({message:"Server error"});
+    }
+}
+
+exports.getStudentsCountByInstructor = async(req, res)=>{
+    try{
+        const enrollments = await Enrollment.find().populate('course');
+        const studentCount = enrollments.filter(enrollment => enrollment.course.instructor.equals(req.user.id)).length;
+        return res.status(200).json({count: studentCount});
     }catch(err){
         console.log(err);
         return res.status(500).json({message:"Server error"});

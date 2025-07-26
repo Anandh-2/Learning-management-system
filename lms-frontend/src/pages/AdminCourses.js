@@ -1,14 +1,40 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import Course from '../components/Course';
+import { getAllCourses } from '../api/Api';
+import '../styles/AdminCourses.css';
 
 function AdminCourses() {
+  const [courses, setCourses] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      setIsLoading(true);
+      const data = await getAllCourses();
+      setCourses(data);
+      setIsLoading(false);
+    };
+    fetchCourses();
+  }, []);
+
   return (
     <div className='admin-courses'>
-      <div className='filters'>
+      {/* <div className='filters'>
         <select>
           <option value="">All Courses</option>
           <option value="active">Active Courses</option>
           <option value="inactive">Inactive Courses</option>
         </select>
+      </div> */}
+
+      <div className='courses-list'>
+        {isLoading ? (
+          <p>Loading courses...</p>
+        ) : (
+          courses.map((course) => (
+            <Course key={course.id} id={course.id} title={course.title} instructor={course.instructor.username} />
+          ))
+        )}
       </div>
     </div>
   )

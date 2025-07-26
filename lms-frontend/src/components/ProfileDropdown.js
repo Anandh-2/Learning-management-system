@@ -5,17 +5,15 @@ import { useAuth } from '../context/AuthContext'
 
 function ProfileDropdown() {
 
-  const {logout}=useAuth();
+  const {user,logout}=useAuth();
   const handleLogout = () => {
     localStorage.removeItem("usertoken");
     logout();
   }
   return (
     <div className='profile-dropdown' onMouseDown={(e)=>e.preventDefault()}>
-        <ul>
-            <li><Link to={'/login'}>Profile</Link></li>
-            <li onClick={handleLogout}>Logout</li>
-        </ul>
+        <div className='greeting'>Hi, {user.name}!</div>
+        <button onClick={handleLogout}>Logout</button>
     </div>
   )
 }

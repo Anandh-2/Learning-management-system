@@ -1,0 +1,60 @@
+.instructor-dashboard{
+    /* height: calc(100% - 70px); */
+    /* overflow-y: scroll; */
+    /* scroll-behavior: smooth; */
+    /* scrollbar-width: none; */
+}
+
+.instructor-dashboard .cards-container{
+    display: flex;
+    gap: 20px;
+    padding: 10px 20px 10px 20px;
+}
+
+.instructor-dashboard .card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    background-color: #f5f8ff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px #ccc;
+}
+
+.instructor-dashboard .card .card-title{
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.instructor-dashboard .card .card-data{
+    font-size: 2em;
+    font-weight: 700;
+}
+
+.instructor-dashboard .course-row-list{
+    margin: 20px;
+    border: 3px solid #f5f8ff;
+    border-radius: 10px;
+}
+
+.instructor-dashboard .course-row-head{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 3px solid #f5f8ff;
+}
+
+.instructor-dashboard .more-btn{
+    background-color: transparent;
+    border: none;
+    font-size: 1.2em;
+}
+
+.instructor-dashboard .course-row{
+    display: flex;
+    padding: 30px 20px;
+    gap: 30px;
+}

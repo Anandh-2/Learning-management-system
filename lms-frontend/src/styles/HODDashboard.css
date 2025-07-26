@@ -1,14 +1,14 @@
-.admin-dashboard{
+.hod-dashboard{
     box-sizing: border-box;
 }
 
-.admin-dashboard .cards-container{
+.hod-dashboard .cards-container{
     display: flex;
     gap: 20px;
     padding: 10px 20px 10px 20px;
 }
 
-.admin-dashboard .card{
+.hod-dashboard .card{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,42 +21,42 @@
     box-shadow: 2px 2px 2px 2px #ccc;
 }
 
-.admin-dashboard .card .card-title{
+.hod-dashboard .card .card-title{
     font-size: 1.2em;
     font-weight: 700;
 }
 
-.admin-dashboard .card .card-data{
+.hod-dashboard .card .card-data{
     font-size: 2em;
     font-weight: 700;
 }
 
-.admin-dashboard .course-row-list{
+.hod-dashboard .course-row-list{
     margin: 20px;
     border: 3px solid #f5f8ff;
     border-radius: 10px;
 }
 
-.admin-dashboard .course-row-head{
+.hod-dashboard .course-row-head{
     display: flex;
     justify-content: space-between;
     padding: 20px;
     border-bottom: 3px solid #f5f8ff;
 }
 
-.admin-dashboard .more-btn{
+.hod-dashboard .more-btn{
     background-color: transparent;
     border: none;
     font-size: 1.2em;
 }
 
-.admin-dashboard .course-row{
+.hod-dashboard .course-row{
     display: flex;
     padding: 30px 20px;
     gap: 30px;
 }
 
-.admin-dashboard .quick-actions{
+.hod-dashboard .quick-actions{
     margin: 40px 20px;
     display: flex;
     /* width: 100%; */
@@ -64,30 +64,30 @@
     border-radius: 10px;
 }
 
-.admin-dashboard .quick-actions .row-head{
+.hod-dashboard .quick-actions .row-head{
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
 }
 
-.admin-dashboard .pending-approvals{
+.hod-dashboard .pending-approvals{
     flex: 0.5;
 }
 
-.admin-dashboard .new-courses{
+.hod-dashboard .new-courses{
     flex: 0.5;
     border-left: 2px solid #f5f8ff;
 }
 
-.admin-dashboard .quick-actions table{
+.hod-dashboard .quick-actions table{
     width: 100%;
     border-collapse: collapse;
     border: 2px solid #f5f8ff;
     border-radius: 10px;
 }
 
-.admin-dashboard .quick-actions th, .admin-dashboard .quick-actions td{
+.hod-dashboard .quick-actions th, .hod-dashboard .quick-actions td{
     padding: 10px;
     text-align: left;
     border: 1px solid #f5f8ff;

@@ -10,8 +10,10 @@ import { FiUsers } from "react-icons/fi";
 import {DragDropContext, Droppable, Draggable} from '@hello-pangea/dnd'
 import { useNavigate } from 'react-router-dom';
 import { createContent, createModule, deleteModule, reorderCourse } from '../api/Api';
+import { useAuth } from '../context/AuthContext';
 
 function ContentsBar({course, setCourse}) {
+  const {user} = useAuth();
   console.log(course)
   const [openModuleId, setOpenModuleId] = useState(null);
   const [openOptionId, setOpenOptionId] = useState(null);
@@ -137,9 +139,9 @@ function ContentsBar({course, setCourse}) {
     <div className='bar-top'>
       <IoMdArrowRoundBack className='bar-top-btns' onClick={()=>navigate(-1)}/>
       <div className='bar-top-right'>
-      <FiUsers className='bar-top-btns' onClick={()=>navigate(`students`)}/>
-      <CgFolderAdd className='bar-top-btns' onClick={()=>setIsModuleModalOpen(prev=>!prev)}/>
-      {isShuffleOn?<FaRegCheckCircle style={{backgroundColor:'#355f42'}} className='bar-top-btns' onClick={handleShuffleSaveClk}/>:<LuShuffle className='bar-top-btns' onClick={handleShuffleClk}/>}
+      {user.role!=='student'&&<FiUsers className='bar-top-btns' onClick={()=>navigate(`students`)}/>}
+      {user.role!=='student'&&<CgFolderAdd className='bar-top-btns' onClick={()=>setIsModuleModalOpen(prev=>!prev)}/>}
+      {user.role!=='student'&&<div>{isShuffleOn?<FaRegCheckCircle style={{backgroundColor:'#355f42'}} className='bar-top-btns' onClick={handleShuffleSaveClk}/>:<LuShuffle className='bar-top-btns' onClick={handleShuffleClk}/>}</div>}
       <LuPanelLeftClose onClick={()=>setIsSidebarOpen(prev=>!prev)} className={`bar-top-btns ${isSidebarOpen?'':'fixed'}`}/>
       </div>
     </div>
@@ -176,7 +178,7 @@ function ContentsBar({course, setCourse}) {
                     {...provided.draggableProps}
                     {...(isShuffleOn ? provided.dragHandleProps : {})}
                   >
-                    <div className='module-title'><div style={{fontWeight:600,flex:1}} onClick={()=>setOpenModuleId(prev => prev===module._id?null:module._id)}>{module.title}</div><button className='module-opns' onClick={(e)=>{e.stopPropagation();setOpenOptionId(prev=>prev===module._id?null:module._id)}}><SlOptionsVertical className='module-opns'/></button></div>
+                    <div className='module-title'><div style={{fontWeight:600,flex:1}} onClick={()=>setOpenModuleId(prev => prev===module._id?null:module._id)}>{module.title}</div>{user.role!=='student'&&<button className='module-opns' onClick={(e)=>{e.stopPropagation();setOpenOptionId(prev=>prev===module._id?null:module._id)}}><SlOptionsVertical className='module-opns'/></button>}</div>
                     {openOptionId===module._id && <div className='module-options' ref={optionRef}>
                       <ul className='module-options-list'>
                         <li onClick={()=>handleAddContent(module._id, "video")}>Add Content</li>

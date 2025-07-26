@@ -3,8 +3,10 @@ import CourseImg from '../images/Course.jpg'
 import '../styles/Course.css'
 import { useNavigate } from 'react-router-dom'
 import { SlOptionsVertical } from "react-icons/sl";
+import { useAuth } from '../context/AuthContext';
 
 function Course({id, title, instructor, handleDelete}) {
+  const {user} = useAuth();
   const navigate = useNavigate();
   const [isOpOpen, setIsOpOpen] = useState(false);
 
@@ -23,9 +25,9 @@ function Course({id, title, instructor, handleDelete}) {
 
   return (
     <div className='course' onClick={() => navigate(`/course/${id}`)}>
-      <button className='option-btn' onClick={(e) => { e.stopPropagation(); setIsOpOpen(prev => !prev); }}>
+      {user.role!=='student'&&<button className='option-btn' onClick={(e) => { e.stopPropagation(); setIsOpOpen(prev => !prev); }}>
         <SlOptionsVertical />
-      </button>
+      </button>}
 
       {isOpOpen && (
         <div className='options' ref={optionRef}>
