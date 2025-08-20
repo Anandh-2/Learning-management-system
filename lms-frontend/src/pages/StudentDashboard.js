@@ -88,7 +88,7 @@ function StudentDashboard() {
       </div>
       <div className='course-row'>
         {newCourses.map((course)=>(
-          <Course key={course.id} id={course.id} title={course.title} instructor={course.instructor.username}/>
+          <Course key={course._id} id={course._id} title={course.title} instructor={course.instructor.username}/>
         ))}
       </div>
       </div>
