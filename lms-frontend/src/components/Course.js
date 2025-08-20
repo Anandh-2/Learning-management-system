@@ -11,6 +11,7 @@ function Course({id, title, instructor, handleDelete}) {
   const [isOpOpen, setIsOpOpen] = useState(false);
 
   const optionRef = useRef();
+  console.log(id);
 
   useEffect(()=>{
     const handleClickOutside = (e)=>{

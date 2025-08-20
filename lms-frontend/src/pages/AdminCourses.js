@@ -11,6 +11,7 @@ function AdminCourses() {
     const fetchCourses = async () => {
       setIsLoading(true);
       const data = await getAllCourses();
+      console.log(data);
       setCourses(data);
       setIsLoading(false);
     };
@@ -32,7 +33,7 @@ function AdminCourses() {
           <p>Loading courses...</p>
         ) : (
           courses.map((course) => (
-            <Course key={course.id} id={course.id} title={course.title} instructor={course.instructor.username} />
+            <Course key={course._id} id={course._id} title={course.title} instructor={course.instructor.username} />
           ))
         )}
       </div>

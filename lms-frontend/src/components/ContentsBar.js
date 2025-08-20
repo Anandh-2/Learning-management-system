@@ -164,7 +164,7 @@ function ContentsBar({course, setCourse}) {
     <div>
     <h2 className='course-title'>{course.title}</h2>
     </div>
-    {course.modules.length===0 ? <p>No module</p>:
+    {course.modules.length===0 ? <div style={{fontSize:'1.2em', textAlign:'center'}}>No module</div>:
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId='modules' type='module'>
         {(provided)=>(
